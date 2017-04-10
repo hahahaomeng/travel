@@ -101,7 +101,7 @@ public class User  implements java.io.Serializable {
         this.type = type;
     }
     
-    @Column(name="password", nullable=false, length=11)
+    @Column(name="password", nullable=false, length=45)
 
     public String getPassword() {
         return this.password;
@@ -160,16 +160,16 @@ public class User  implements java.io.Serializable {
     public void setNotice(String notice) {
         this.notice = notice;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
-
-    public Set<Order> getOrders() {
-        return this.orders;
-    }
-    
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-   
+//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="user")
+//
+//    public Set<Order> getOrders() {
+//        return this.orders;
+//    }
+//    
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
+//   
 
 
 

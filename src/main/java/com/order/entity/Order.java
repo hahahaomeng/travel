@@ -168,25 +168,25 @@ public class Order  implements java.io.Serializable {
     public void setGonumber(Integer gonumber) {
         this.gonumber = gonumber;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="order")
-
-    public Set<Comment> getComments() {
-        return this.comments;
-    }
-    
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="order")
-
-    public Set<Application> getApplications() {
-        return this.applications;
-    }
-    
-    public void setApplications(Set<Application> applications) {
-        this.applications = applications;
-    }
-   
+//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="order")
+//
+//    public Set<Comment> getComments() {
+//        return this.comments;
+//    }
+//    
+//    public void setComments(Set<Comment> comments) {
+//        this.comments = comments;
+//    }
+//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="order")
+//
+//    public Set<Application> getApplications() {
+//        return this.applications;
+//    }
+//    
+//    public void setApplications(Set<Application> applications) {
+//        this.applications = applications;
+//    }
+//   
 
 
 

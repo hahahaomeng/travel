@@ -188,15 +188,15 @@ public class Product  implements java.io.Serializable {
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
-@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="product")
-
-    public Set<Order> getOrders() {
-        return this.orders;
-    }
-    
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
+//@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="product")
+//
+//    public Set<Order> getOrders() {
+//        return this.orders;
+//    }
+//    
+//    public void setOrders(Set<Order> orders) {
+//        this.orders = orders;
+//    }
    
 
 

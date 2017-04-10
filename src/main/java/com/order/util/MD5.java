@@ -1,6 +1,7 @@
 package com.order.util;
 
 import java.security.MessageDigest;
+
 import sun.misc.BASE64Encoder;
 
 public class MD5 {
