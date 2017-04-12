@@ -16,7 +16,7 @@ app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http) {
         })
     };
 });
-app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http) {
+app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$location) {
     $scope.name_err=false;
 	$scope.register=function () {
 
@@ -72,7 +72,13 @@ app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http) {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
         }).then(function (data) {
-            console.log(data);
+            if(data.data.code==300){
+                $('.checkcode_err').popover('show')
+            }
+            else{
+                $('.checkcode_err').popover('hide')
+            }
+            console.log($scope.name_err)
         })
     }
     $scope.ensurePws=function () {
@@ -97,5 +103,8 @@ app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http) {
         }else{
             $(".email_err").popover('hide')
         }
+    }
+    $scope.cancel=function () {
+        $location.path("/")
     }
 })
