@@ -2,18 +2,23 @@ package com.order.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.order.entity.User;
 import com.order.service.UserService;
+import com.order.util.CreateUUID;
 import com.order.util.MD5;
+import com.order.util.Mail;
 
 public class UserAction extends ActionSupport implements ModelDriven<User>{
 	private User user = new User();
@@ -61,6 +66,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		JSONObject json=new JSONObject();
 		String isCheckEmail = (String) ServletActionContext.getRequest()
 				.getSession().getAttribute("checkEmail");
+		System.out.println(isCheckEmail);
 		if (null == isCheckEmail || !"true".equals(isCheckEmail)) {
 			json.accumulate("code", 500);
 			json.accumulate("errMsg", "邮箱错误");
@@ -94,6 +100,102 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		out.println(json.toString());
 		out.flush();
 		out.close();
+		return NONE;
+	}
+	/**
+	 * 邮箱验证
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	public String checkCode() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String code = (String) ServletActionContext.getRequest().getSession()
+				.getAttribute("checkCode");
+		if (user.getCheckcode().equals(code)) {
+			json.accumulate("code", 200);
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("checkEmail", "true");
+		} else {
+			json.accumulate("code", 300);
+			json.accumulate("errMsg", "check code is wrong");
+		}
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+
+	/**
+	 * 发送激活邮件
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	public String sendEmail() throws IOException {
+		String checkCode = CreateUUID.createUUID().toString().substring(0, 6);
+		System.out.println(user.getEmail());
+		Mail.send(user.getEmail(), checkCode);
+		ActionContext ac = ActionContext.getContext();
+		ac.getSession().put("checkCode", checkCode);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+		json.accumulate("code", 200);
+		out.println(json.toString());
+		out.flush();
+		out.close();
+		return NONE;
+	}
+
+	/**
+	 * 判断邮箱是否存在
+	 * 
+	 * @throws IOException
+	 */
+	public String checkEmail() throws IOException {
+		// 查找所有用户
+		// System.out.println(user.getEmail());
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		JSONObject json = new JSONObject();
+		List<User> list2 = this.userService.findAllUser();
+		String email = user.getEmail();
+		// System.out.println(list2.size());
+		int j = 0;
+		for (User a : list2) {
+			if (a.getEmail().equals(email) == true) {
+				j = 1;
+			}
+		}
+		if (j == 1) {
+			json.accumulate("code", 300);
+			json.accumulate("errMsg", "该邮箱已经注册");
+		} else {
+			json.accumulate("code", 200);
+		}
+		out.println(json.toString());
+		out.flush();
+		out.close();
+		return NONE;
+	}
+
+	/**
+	 * 获取个人信息
+	 * 
+	 * @throws IOException
+	 */
+	public String getPersonInfo() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		User user1 = (User) ServletActionContext.getRequest().getSession()
+				.getAttribute("user");
+		JSONObject json = new JSONObject();
+		json.accumulate("code", 200);
+		json.accumulate("data", userService.findByUserId(user1.getUserid()));
+		response.getWriter().println(json.toString());
 		return NONE;
 	}
 }

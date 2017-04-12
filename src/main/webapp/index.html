@@ -3,28 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>首页</title>
-	<script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="angular.js"></script>
 	<link href="bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 	<link href="bootstrap-theme.css" rel="stylesheet">
-	<script src="//code.angularjs.org/snapshot/angular-route.js"></script>
-	<script>
-		
-	</script>
+	<script src="angular-route.js"></script>
+	<script src="App.js"></script>
+
 </head>
 <body>
-	<div class="navbar navbar-inverse">
-		<a class="navbar-brand" href="#">travel</a>
-		<a class="navbar-brand" href="#!login">登录</a>
-	</div>
 	<div ng-view></div>
-	<div class="panel panel-default row">
-		<div class="col-3">
-			Categories go here
-		</div>
-		<div class="col-8">
-			Products go here
-		</div>
-	</div>
 	<script src="controllers/travel.js"></script>
 </body>
 

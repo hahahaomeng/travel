@@ -39,7 +39,7 @@ public class Mail {
 
 	}
 	
-	public static void main(String[] args) {
-		send("3564272699@qq.com","23456");
-	}
+//	public static void main(String[] args) {
+//		send("1621250794@qq.com","23456");
+//	}
 }

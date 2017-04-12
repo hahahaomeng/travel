@@ -42,4 +42,13 @@ public class UserService {
 		user.setCheckcode(code);
 		this.userDAO.save(user);
 	}
+	public List<User> findAllUser() {
+		List<User> list = this.userDAO.findAll();
+		return list;
+	}
+	public User findByUserId(Integer userid) {
+		// TODO Auto-generated method stub
+		User user=userDAO.findById(userid);
+		return null;
+	}
 }
