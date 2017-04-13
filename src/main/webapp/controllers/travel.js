@@ -2,7 +2,7 @@
  * Created by fanhao on 2017/4/11.
  */
 //登陆控制器
-app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http) {
+app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$location,$rootScope) {
     $scope.submits = function () {
         $http({
             url: "user_login.json",
@@ -12,9 +12,17 @@ app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http) {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
         }).then(function (data) {
-            console.log(data);
+            if(data.data.code==200) {
+                $scope.user=data.data.data;
+                $location.path("/homeSuccess/"+$scope.user.username);
+            }else{
+                $location.path("/")
+            }
         })
     };
+    $scope.cancel=function () {
+        $location.path("/")
+    }
 });
 app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$location) {
     $scope.name_err=false;
@@ -107,4 +115,11 @@ app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$locat
     $scope.cancel=function () {
         $location.path("/")
     }
+})
+app.controller("logSucCtrl",function ($scope,$http,$location,$route,$routeParams,$httpParamSerializer) {
+    $scope.$on("$routeChangeSuccess",function () {
+        if($location.path().indexOf("/homeSuccess/")==0){
+            $scope.username=$routeParams["username"];
+        }
+    })
 })

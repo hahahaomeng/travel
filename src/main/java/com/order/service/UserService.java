@@ -42,13 +42,30 @@ public class UserService {
 		user.setCheckcode(code);
 		this.userDAO.save(user);
 	}
+	/**
+	 * 查找所有用户
+	 * @return
+	 */
 	public List<User> findAllUser() {
 		List<User> list = this.userDAO.findAll();
 		return list;
 	}
+	/**
+	 *根据id查找用户
+	 * @param userid
+	 * @return
+	 */
 	public User findByUserId(Integer userid) {
 		// TODO Auto-generated method stub
 		User user=userDAO.findById(userid);
 		return null;
+	}
+	/**
+	 * 更新用户
+	 * @param user2
+	 */
+	public void update(User user2) {
+		// TODO Auto-generated method stub
+		userDAO.attachDirty(user2);
 	}
 }

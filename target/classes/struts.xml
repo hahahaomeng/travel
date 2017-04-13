@@ -6,5 +6,7 @@
 	<package name="struts" namespace="/" extends="struts-default">
 		<action name="user_*" class="com.order.action.UserAction" method="{1}">
 		</action>
+		<action name="product_*" class="com.order.action.ProductAction" method="{1}">
+		</action>
 	</package>
 </struts>

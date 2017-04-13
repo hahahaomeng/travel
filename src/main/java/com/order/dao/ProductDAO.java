@@ -179,7 +179,7 @@ public class ProductDAO  {
 	public List findAll() {
 		log.debug("finding all Product instances");
 		try {
-			String queryString = "from Product";
+			String queryString = "from Product as model where model.prostate='0'";
 	         Query queryObject = getCurrentSession().createQuery(queryString);
 			 return queryObject.list();
 		} catch (RuntimeException re) {

@@ -75,6 +75,11 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="ProductDAO" class="com.order.dao.ProductDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	
 	
 	<bean id="userService" class="com.order.service.UserService">
@@ -82,8 +87,16 @@
 			<ref bean="UserDAO" />
 		</property>
 	</bean>
+	<bean id="productService" class="com.order.service.ProductService">
+		<property name="productDAO">
+			<ref bean="ProductDAO" />
+		</property>
+	</bean>
 	
 	<bean id="userAction" class="com.order.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"/>
+	</bean>
+	<bean id="productAction" class="com.order.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"/>
 	</bean>
 </beans>

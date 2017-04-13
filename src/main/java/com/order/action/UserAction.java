@@ -125,6 +125,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		response.getWriter().print(json.toString());
 		return NONE;
 	}
+	
 
 	/**
 	 * 发送激活邮件
@@ -196,6 +197,79 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		json.accumulate("code", 200);
 		json.accumulate("data", userService.findByUserId(user1.getUserid()));
 		response.getWriter().println(json.toString());
+		return NONE;
+	}
+	/**
+	 * 注销
+	 */
+	public String logout() throws IOException{
+		ServletActionContext.getRequest().getSession()
+		.setAttribute("user", null);
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		json.accumulate("code", 200);
+		json.accumulate("data", null);
+		response.getWriter().println(json.toString());
+		return NONE;
+	}
+	/**
+	 * 修改个人信息
+	 * @throws IOException 
+	 */
+	public String modifyUserInfo() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		User user1 = (User) ServletActionContext.getRequest().getSession()
+				.getAttribute("user");
+		User user2=userService.findByUserId(user1.getUserid());
+		user2.setPhone(user.getPhone());
+		user2.setUsername(user.getUsername());
+		userService.update(user2);
+		JSONObject json = new JSONObject();
+		json.accumulate("code", 200);
+		json.accumulate("data", null);
+		response.getWriter().println(json.toString());
+		return NONE;
+	}
+	/**
+	 * 忘记密码邮件
+	 */
+	public String modPasswordEmail() throws IOException {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		User user1 = userService.findByUserName(user.getUsername());
+		String checkCode = CreateUUID.createUUID().toString().substring(0, 6);
+		Mail.send(user1.getEmail(), checkCode);
+		ServletActionContext.getRequest().getSession().setAttribute("username", user.getUsername());
+		ServletActionContext.getRequest().getSession().setAttribute("checkCode", checkCode);
+		JSONObject json = new JSONObject();
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 修改密码
+	 */
+	public String modPassword() throws Exception {
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String isCheckEmail = (String) ServletActionContext.getRequest()
+				.getSession().getAttribute("checkEmail");
+		String username = (String) ServletActionContext.getRequest()
+				.getSession().getAttribute("username");
+		if (null == isCheckEmail || !"true".equals(isCheckEmail)) {
+			json.accumulate("code", 500);
+			json.accumulate("errMsg", "csrf");
+			response.getWriter().print(json.toString());
+		} else {
+			User user1 = userService.findByUserName(username);
+			user1.setPassword(MD5.encoderByMd5(user.getPassword()));
+			userService.update(user1);
+			json.accumulate("code", 200);
+			response.getWriter().print(json.toString());
+		}
 		return NONE;
 	}
 }
