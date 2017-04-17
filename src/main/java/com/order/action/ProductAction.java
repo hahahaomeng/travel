@@ -108,4 +108,15 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		response.getWriter().println(json.toString());
 		return NONE;
 	}
+	public String findProById() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		Product product=productService.findProductById(Integer.parseInt(request.getParameter("productid")));
+		json.accumulate("code", 200);
+		json.accumulate("data", product);
+		response.getWriter().println(json.toString());
+		return NONE;
+	}
 }

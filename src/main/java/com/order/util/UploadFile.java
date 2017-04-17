@@ -13,10 +13,10 @@ import com.qiniu.util.Auth;
 
 public class UploadFile {
     //设置好账号的ACCESS_KEY和SECRET_KEY
-    private static String ACCESS_KEY = "eXoXrwZ21Gfyh9DCfymt1OJtdRSVZf67djRvC0kA";
-    private static String SECRET_KEY = "SUMISZbx2mSqk52Nb7eqd8q2ud2YILIrJQNo2QZU";
+    private static String ACCESS_KEY = "27mIhj6zje0yeUhzxRPYdTV-ZIphptAFVk_y-KkO";
+    private static String SECRET_KEY = "xmdfpexPcbO_uwlMa3TiFhw2nA40mRd3UJtQ7qJw";
     //要上传的空间
-    private static String bucketname = "lfeng";
+    private static String bucketname = "hahahaomeng";
     //上传到七牛后保存的文件名
     private static String key;
     //上传文件的路径
@@ -58,7 +58,7 @@ public class UploadFile {
         	FileInputStream fis = new FileInputStream(new File(path));
 
         	key = CreateUUID.createUUID().toString() + ".jpg";
-        	String yu = "http://oh59g24op.bkt.clouddn.com/" + key;
+        	String yu = "http://omn47ivyk.bkt.clouddn.com/" + key;
             //调用put方法上传
             //Response res = uploadManager.put(path, key, getUpToken());
         	Response res = uploadManager.put(fis, key, getUpToken(), null, null);

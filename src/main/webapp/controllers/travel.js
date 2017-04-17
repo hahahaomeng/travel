@@ -2,7 +2,8 @@
  * Created by fanhao on 2017/4/11.
  */
 //登陆控制器
-app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$location,$rootScope) {
+var myContrl=angular.module('controllers',[]);
+myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$state) {
     $scope.submits = function () {
         $http({
             url: "user_login.json",
@@ -14,17 +15,18 @@ app.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$location
         }).then(function (data) {
             if(data.data.code==200) {
                 $scope.user=data.data.data;
-                $location.path("/homeSuccess/"+$scope.user.username);
+                $state.go('homeSuccess',{username:$scope.user.username});
             }else{
-                $location.path("/")
+                $state.go('index');
             }
         })
     };
     $scope.cancel=function () {
-        $location.path("/")
+        $state.go('index');
     }
 });
-app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$location) {
+//注册控制器
+myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$location) {
     $scope.name_err=false;
 	$scope.register=function () {
 
@@ -116,10 +118,47 @@ app.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$locat
         $location.path("/")
     }
 })
-app.controller("logSucCtrl",function ($scope,$http,$location,$route,$routeParams,$httpParamSerializer) {
-    $scope.$on("$routeChangeSuccess",function () {
-        if($location.path().indexOf("/homeSuccess/")==0){
-            $scope.username=$routeParams["username"];
+//登陆成功控制器
+myContrl.controller("logSucCtrl",function ($scope,$state,$stateParams) {
+   $scope.username=$stateParams.username;
+   console.log($scope.username);
+})
+//获取产品列表控制器
+myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
+    $scope.productdetail=function(productid) {
+        $state.go('productdetail',{productid:productid});
+    }
+    $http({
+            url: "product_findAllPro.json",
+            method: "post",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $scope.product=data.data.data;
+            }else{
+                $scope.product=null;
+            }
+        })
+
+})
+myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.productid=$stateParams.productid;
+
+    $http({
+        url: "product_findProById.json",
+        method: "post",
+        data: $httpParamSerializer({productid:$scope.productid}),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.product=data.data.data;
+            console.log($scope.product);
+        }else{
+            $scope.product=null;
         }
     })
 })
