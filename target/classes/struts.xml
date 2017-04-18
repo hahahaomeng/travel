@@ -8,5 +8,7 @@
 		</action>
 		<action name="product_*" class="com.order.action.ProductAction" method="{1}">
 		</action>
+		<action name="order_*" class="com.order.action.OrderAction" method="{1}">
+		</action>
 	</package>
 </struts>

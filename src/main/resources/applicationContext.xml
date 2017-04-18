@@ -80,6 +80,11 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	<bean id="OrderDAO" class="com.order.dao.OrderDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 	
 	
 	<bean id="userService" class="com.order.service.UserService">
@@ -92,11 +97,21 @@
 			<ref bean="ProductDAO" />
 		</property>
 	</bean>
+	<bean id="orderService" class="com.order.service.OrderService">
+		<property name="orderDAO">
+			<ref bean="OrderDAO" />
+		</property>
+	</bean>
+	
 	
 	<bean id="userAction" class="com.order.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"/>
 	</bean>
 	<bean id="productAction" class="com.order.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"/>
+	</bean>
+	<bean id="orderAction" class="com.order.action.OrderAction" scope="prototype">
+		<property name="orderService" ref="orderService"/>
 		<property name="productService" ref="productService"/>
 	</bean>
 </beans>

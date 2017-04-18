@@ -7,3 +7,8 @@ myDirectives.directive('product',function () {
         templateUrl:'./views/product.html'
     }
 })
+myDirectives.directive('top',function () {
+    return{
+        templateUrl:'./views/homeSuccess.html'
+    }
+})

@@ -87,7 +87,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		product2.setProplace(request.getParameter("proplace"));
 		productService.modProduct(product2);
 		json.accumulate("code", 200);
-		json.accumulate("data", product);
+		json.accumulate("data", product2);
 		response.getWriter().print(json.toString());
 		return NONE;
 	}

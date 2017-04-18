@@ -6,13 +6,18 @@
             <h1>{{product.productname}}</h1>
             <div class="price">￥{{product.price}}</div>
             <div class="detail">{{product.prodetail}}</div>
+            <div class="input-group form-group">
+                出游人数
+                <input type="number" min="1" class="form-control"  id="gonumber" name="gonumber" ng-model="gonumber"/>
+            </div>
+            <div>
+                出发日期
+                <input type="date" value="2015-09-24" ng-model="godate"/>
+            </div>
+            <button class="btn btn-primary"  ng-click="applyorder()">立即预定</button>
         </div>
     </div>
-    <div>
-        <div class="input-group form-group">
-            <input type="number" min="1" class="form-control"/>
-        </div>
-    </div>
+    <hr>
     <div>
         <span>{{product.prodescribe}}</span>
     </div>

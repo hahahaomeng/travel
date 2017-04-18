@@ -35,12 +35,22 @@ app.run(function($rootScope, $state, $stateParams) {
             templateUrl: "./views/product.html",
             controller:'getProCtrl'
         }).state("homeSuccess",{
-            url:'/homeSuccess?username',
+            url:'/homeSuccess?username&productid&orderid',
             templateUrl:'views/homeSuccess.html',
+            abstract:true,
             controller:'logSucCtrl'
         }).state("productdetail",{
             url:'/productdetail?productid',
             templateUrl:'views/productdetail.html',
             controller:'getProCtrl'
+        }).state("homeSuccess.product",{
+            url:"/homeSuccess/product",
+            templateUrl:'views/product.html'
+        }).state("homeSuccess.productdetail",{
+            url:"/homeSuccess/productdetail",
+            templateUrl:'views/productdetail.html'
+        }).state("homeSuccess.order",{
+            url:"/homeSuccess/order",
+            templateUrl:'views/order.html'
         })
     });

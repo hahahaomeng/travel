@@ -15,7 +15,7 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
         }).then(function (data) {
             if(data.data.code==200) {
                 $scope.user=data.data.data;
-                $state.go('homeSuccess',{username:$scope.user.username});
+                $state.go('homeSuccess.product',{username:$scope.user.username});
             }else{
                 $state.go('index');
             }
@@ -121,12 +121,11 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
 //登陆成功控制器
 myContrl.controller("logSucCtrl",function ($scope,$state,$stateParams) {
    $scope.username=$stateParams.username;
-   console.log($scope.username);
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
     $scope.productdetail=function(productid) {
-        $state.go('productdetail',{productid:productid});
+        $state.go('homeSuccess.productdetail',{productid:productid});
     }
     $http({
             url: "product_findAllPro.json",
@@ -143,9 +142,26 @@ myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
         })
 
 })
+//产品详情页面控制器
 myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
     $scope.productid=$stateParams.productid;
-
+    $scope.applyorder=function () {
+        $http({
+            url: "order_applyOrder.json",
+            method: "post",
+            data: $httpParamSerializer({productid:$scope.productid,price:$scope.product.price,gonumber:$scope.gonumber,godate:$scope.godate}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $scope.order=data.data.data;
+                $state.go('homeSuccess.order',{orderid:$scope.order.orderid});
+            }else{
+                $scope.order=null;
+            }
+        })
+    }
     $http({
         url: "product_findProById.json",
         method: "post",
@@ -161,4 +177,8 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
             $scope.product=null;
         }
     })
+})
+//下订单页面控制器
+myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.orderid=$stateParams.orderid;
 })
