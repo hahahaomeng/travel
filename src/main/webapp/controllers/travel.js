@@ -119,8 +119,11 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
     }
 })
 //登陆成功控制器
-myContrl.controller("logSucCtrl",function ($scope,$state,$stateParams) {
+myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams) {
    $scope.username=$stateParams.username;
+   $scope.getAllOrder=function () {
+       $state.go('homeSuccess.order');
+   }
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
@@ -178,7 +181,21 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
         }
     })
 })
-//下订单页面控制器
+//查询订单页面控制器
 myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
-    $scope.orderid=$stateParams.orderid;
+    $http({
+        url: "order_findAllOrder.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.order=data.data.data;
+            console.log($scope.order);
+            $state.go('homeSuccess.order');
+        }else{
+            $state.go('index');
+        }
+    })
 })

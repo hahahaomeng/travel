@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.order.bean.OrderDate;
 import com.order.entity.Order;
 import com.order.entity.Product;
 import com.order.entity.User;
@@ -77,8 +79,21 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	}
 	/**
 	 * 用户查看所有订单
+	 * @throws IOException 
 	 */
-	
+	public String findAllOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user = (User) request.getSession().getAttribute("user");
+		//System.out.println(user);
+		List<OrderDate> orders=orderService.findOrdByUser(user);
+		json.accumulate("code", 200);
+		json.accumulate("data", orders);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 	/**
 	 * 用户查看未付款订单
 	 */

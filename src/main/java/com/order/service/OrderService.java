@@ -1,7 +1,13 @@
 package com.order.service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.order.bean.OrderDate;
 import com.order.dao.OrderDAO;
 import com.order.entity.Order;
+import com.order.entity.User;
 
 public class OrderService {
 	private OrderDAO orderDAO;
@@ -26,5 +32,23 @@ public class OrderService {
 	public void payOrder(Order order){
 		order.setState("1");
 		orderDAO.attachDirty(order);
+	}
+	/**
+	 * 根据用户查找order
+	 */
+	public List<OrderDate> findOrdByUser(User user){
+		List<Order> list= orderDAO.findByProperty("user", user);
+		List<OrderDate> list2=new ArrayList<OrderDate>();
+		for(Order order:list){
+			OrderDate orderDate=new OrderDate();
+			orderDate.setProductname(order.getProduct().getProductname());
+			orderDate.setProplace(order.getProduct().getProplace());
+			orderDate.setPrice(order.getPrice());
+			orderDate.setGoplace(order.getProduct().getGoplace());
+			orderDate.setGonumber(order.getGonumber());
+			orderDate.setGodata(order.getGodate().toString());
+			list2.add(orderDate);
+		}
+		return list2;
 	}
 }	

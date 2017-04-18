@@ -35,7 +35,7 @@ app.run(function($rootScope, $state, $stateParams) {
             templateUrl: "./views/product.html",
             controller:'getProCtrl'
         }).state("homeSuccess",{
-            url:'/homeSuccess?username&productid&orderid',
+            url:'/homeSuccess?username&productid',
             templateUrl:'views/homeSuccess.html',
             abstract:true,
             controller:'logSucCtrl'

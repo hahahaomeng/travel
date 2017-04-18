@@ -1,3 +1,14 @@
 <meta charset="UTF-8">
-<div ng-controller="logSucCtrl" class="btn btn-primary">{{username}}</div>
+<div ng-controller="logSucCtrl">
+    <span class="btn btn-primary">{{username}}</span>
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            查看订单 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a ng-click="getAllOrder()">未付款</a></li>
+        </ul>
+    </div>
+</div>
+
 <div ui-view></div>
