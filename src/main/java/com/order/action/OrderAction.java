@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -67,14 +68,18 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	}
 	/**
 	 * 用户付款
+	 * @throws IOException 
 	 */
-	public String payOrder(){
+	public String payOrder() throws IOException{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json = new JSONObject();
+		System.out.println(request.getParameter("orderid"));
 		Order order=orderService.findOrderByid(Integer.parseInt(request.getParameter("orderid")));
 		orderService.payOrder(order);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
 		return NONE;
 	}
 	/**
@@ -95,11 +100,76 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		return NONE;
 	}
 	/**
+	 * 根据orderid查找order
+	 */
+	public String findOrderById() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String orderid=request.getParameter("orderid");
+		//System.out.println(orderid);
+		Order order=orderService.findOrderByid(Integer.parseInt(orderid));
+		OrderDate orderDate=new OrderDate();
+		orderDate.setProductname(order.getProduct().getProductname());
+		orderDate.setProplace(order.getProduct().getProplace());
+		orderDate.setPrice(order.getPrice());
+		orderDate.setGoplace(order.getProduct().getGoplace());
+		orderDate.setGonumber(order.getGonumber());
+		orderDate.setGodata(order.getGodate().toString());
+		orderDate.setState(order.getState());
+		//System.out.println(order.getOrderid());
+		orderDate.setOrderid(order.getOrderid());
+		//System.out.println(orderDate);
+		json.accumulate("code", 200);
+		json.accumulate("data", orderDate);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
 	 * 用户查看未付款订单
 	 */
-	
+	public String findnoPayOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user = (User) request.getSession().getAttribute("user");
+		//System.out.println(user);
+		List<OrderDate> orders=orderService.findOrdByUser(user);
+		List<OrderDate> orders1=new ArrayList<OrderDate>();
+		for(OrderDate orderDate:orders){
+			if(orderDate.getState().equals("0")){
+				orders1.add(orderDate);
+			}
+		}
+ 		json.accumulate("code", 200);
+		json.accumulate("data", orders1);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 	
 	/**
 	 * 用户查看已付款订单
 	 */
+	public String findPayOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user = (User) request.getSession().getAttribute("user");
+		//System.out.println(user);
+		List<OrderDate> orders=orderService.findOrdByUser(user);
+		List<OrderDate> orders1=new ArrayList<OrderDate>();
+		for(OrderDate orderDate:orders){
+			if(orderDate.getState().equals("1")){
+				orders1.add(orderDate);
+			}
+		}
+		System.out.println(orders1.size());
+ 		json.accumulate("code", 200);
+		json.accumulate("data", orders1);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 }

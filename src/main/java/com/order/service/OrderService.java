@@ -47,8 +47,11 @@ public class OrderService {
 			orderDate.setGoplace(order.getProduct().getGoplace());
 			orderDate.setGonumber(order.getGonumber());
 			orderDate.setGodata(order.getGodate().toString());
+			orderDate.setState(order.getState());
+			orderDate.setOrderid(order.getOrderid());
 			list2.add(orderDate);
 		}
 		return list2;
 	}
+	
 }	

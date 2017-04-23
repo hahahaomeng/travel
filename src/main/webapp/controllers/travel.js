@@ -124,6 +124,12 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
    $scope.getAllOrder=function () {
        $state.go('homeSuccess.order');
    }
+   $scope.getnopayOrder=function () {
+       $state.go('homeSuccess.nopayorder')
+   }
+   $scope.getpayOrder=function () {
+       $state.go('homeSuccess.payedorder')
+   }
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
@@ -159,7 +165,7 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
         }).then(function (data) {
             if(data.data.code==200) {
                 $scope.order=data.data.data;
-                $state.go('homeSuccess.order',{orderid:$scope.order.orderid});
+                $state.go('homeSuccess.payorder',{orderid:$scope.order.orderid});
             }else{
                 $scope.order=null;
             }
@@ -181,7 +187,7 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
         }
     })
 })
-//查询订单页面控制器
+//查询所有订单页面控制器
 myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
     $http({
         url: "order_findAllOrder.json",
@@ -192,10 +198,164 @@ myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamS
     }).then(function (data) {
         if(data.data.code==200) {
             $scope.order=data.data.data;
-            console.log($scope.order);
-            $state.go('homeSuccess.order');
+
         }else{
-            $state.go('index');
+            $scope.order=null;
         }
     })
+    $scope.deleteOrder=function () {
+
+    }
+})
+//查询未付款页面
+myContrl.controller("nopayorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "order_findnoPayOrder.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.order=data.data.data;
+            console.log($scope.order);
+        }else{
+            $scope.order=null;
+        }
+    })
+    $scope.pay=function (orderid) {
+        $http({
+            url: "order_payOrder.json",
+            method: "post",
+            data: $httpParamSerializer({orderid:orderid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload('homeSuccess.nopayorder');
+            }else{
+               console.log("error");
+            }
+        })
+    }
+})
+//查询已付款页面
+myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "order_findPayOrder.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.order=data.data.data;
+
+        }else{
+            $scope.order=null;
+        }
+    })
+})
+//忘记密码页面控制器
+myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.sendCode=function () {
+        $http({
+            url:"user_sendEmail.json",
+            method:"post",
+            data: $httpParamSerializer({email:$scope.email}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            console.log(data);
+        })
+    }
+    //驗證激活碼
+    $scope.check=function () {
+        $http({
+            url:"user_checkCode.json",
+            method:"post",
+            data: $httpParamSerializer({checkcode:$scope.checkcode}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==300){
+                $('.checkcode_err').popover('show')
+            }
+            else{
+                $('.checkcode_err').popover('hide')
+            }
+            console.log($scope.name_err)
+        })
+    }
+    $scope.ensurePws=function () {
+
+        if($scope.password!=$scope.ensurepwd){
+            $(".password_err").popover('show')
+        }
+        else{
+            $(".password_err").popover('hide')
+        }
+    }
+    $scope.checkemail=function () {
+        if(!(/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test($scope.email))){
+            $(".email_err").popover('show')
+        }else{
+            $(".email_err").popover('hide')
+        }
+    }
+    $scope.repassword=function () {
+        $http({
+            url: "user_rePassword.json",
+            method: "post",
+            data: $httpParamSerializer({repassword: $scope.password}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if (data.data.code == 200) {
+                $scope.order = data.data.data;
+                console.log($scope.order);
+            } else {
+                $scope.order = null;
+            }
+        })
+    }
+})
+//付款页面控制器
+myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.orderid = $stateParams.orderid;
+    $http({
+        url: "order_findOrderById.json",
+        method: "post",
+        data: $httpParamSerializer({orderid: $scope.orderid}),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.order = data.data.data;
+            console.log($scope.order);
+        } else {
+            $scope.order = null;
+        }
+    })
+    $scope.paymoney=function (orderid) {
+        $http({
+            url: "order_payOrder.json",
+            method: "post",
+            data: $httpParamSerializer({orderid:orderid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload('homeSuccess.nopayorder');
+            }else{
+                console.log("error");
+            }
+        })
+    }
 })

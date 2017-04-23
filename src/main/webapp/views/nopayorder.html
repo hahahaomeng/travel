@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<div ng-controller="orderCtrl">
+<div ng-controller="nopayorderCtrl">
     <table class="table table-bordered">
         <tr>
             <th>景点名</th>
@@ -8,6 +8,7 @@
             <th>人数</th>
             <th>出发地点</th>
             <th>价格</th>
+            <th>操作</th>
         </tr>
         <tr ng-repeat="item in order">
             <td>{{item.productname}}</td>
@@ -16,6 +17,7 @@
             <td>{{item.gonumber}}</td>
             <td>{{item.goplace}}</td>
             <td>{{item.price}}</td>
+            <td><button ng-click="pay(item.orderid)">付款</button></td>
         </tr>
     </table>
 </div>

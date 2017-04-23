@@ -1,6 +1,8 @@
 package com.order.bean;
 
 public class OrderDate {
+	int orderid;
+	String state;
 	String productname;
 	Double price;
 	String godata;
@@ -42,6 +44,18 @@ public class OrderDate {
 	}
 	public void setProplace(String proplace) {
 		this.proplace = proplace;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public int getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(int orderid) {
+		this.orderid = orderid;
 	}
 	
 }

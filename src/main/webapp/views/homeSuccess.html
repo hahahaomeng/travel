@@ -6,7 +6,9 @@
             查看订单 <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a ng-click="getAllOrder()">未付款</a></li>
+            <li><a ng-click="getAllOrder()">所有订单</a></li>
+            <li><a ng-click="getnopayOrder()">未支付订单</a></li>
+            <li><a ng-click="getpayOrder()" >已支付订单</a></li>
         </ul>
     </div>
 </div>
