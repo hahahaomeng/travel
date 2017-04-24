@@ -75,7 +75,6 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json = new JSONObject();
-		System.out.println(request.getParameter("orderid"));
 		Order order=orderService.findOrderByid(Integer.parseInt(request.getParameter("orderid")));
 		orderService.payOrder(order);
 		json.accumulate("code", 200);
@@ -166,9 +165,24 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 				orders1.add(orderDate);
 			}
 		}
-		System.out.println(orders1.size());
+//		System.out.println(orders1.size());
  		json.accumulate("code", 200);
 		json.accumulate("data", orders1);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 删除订单
+	 * @throws IOException 
+	 */
+	public String deleteOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		Order order=orderService.findOrderByid(Integer.parseInt(request.getParameter("orderid")));
+		orderService.deleteOrder(order);
+		json.accumulate("code", 200);
 		response.getWriter().print(json.toString());
 		return NONE;
 	}

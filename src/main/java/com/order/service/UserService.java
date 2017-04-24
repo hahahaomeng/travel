@@ -58,7 +58,7 @@ public class UserService {
 	public User findByUserId(Integer userid) {
 		// TODO Auto-generated method stub
 		User user=userDAO.findById(userid);
-		return null;
+		return user;
 	}
 	/**
 	 * 更新用户

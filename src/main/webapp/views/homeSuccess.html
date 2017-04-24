@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <div ng-controller="logSucCtrl">
     <ul class="nav-box">
-        <li ng-click="getPersonInfo()">{{username}}</li>
+        <li ng-click="goPersonInfo()">{{username}}</li>
         <li><div class="btn-group">
             <div type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 查看订单 <span class="caret"></span>
@@ -13,7 +13,13 @@
             </ul>
         </div></li>
     </ul>
-
+    <div class="modal fade bs-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div>{{user.username}}</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div ui-view></div>

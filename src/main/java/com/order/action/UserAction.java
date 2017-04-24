@@ -195,6 +195,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		response.setContentType("text/html;charset=UTF-8");
 		User user1 = (User) ServletActionContext.getRequest().getSession()
 				.getAttribute("user");
+		
 		JSONObject json = new JSONObject();
 		json.accumulate("code", 200);
 		json.accumulate("data", userService.findByUserId(user1.getUserid()));

@@ -117,19 +117,6 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
     $scope.cancel=function () {
         $location.path("/")
     }
-    $scope.getPersonInfo=function () {
-        $http({
-            url:"user_getPersonInfo.json",
-            method:"post",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            }
-        }).then(function (data) {
-            if(data.data.code==300){
-                $scope.user=data.data.data;
-            }
-        })
-    }
 })
 //登陆成功控制器
 myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams) {
@@ -143,6 +130,9 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
    $scope.getpayOrder=function () {
        $state.go('homeSuccess.payedorder')
    }
+    $scope.goPersonInfo=function () {
+       $state.go('homeSuccess.personinfo');
+    }
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
@@ -194,7 +184,6 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
     }).then(function (data) {
         if(data.data.code==200) {
             $scope.product=data.data.data;
-            console.log($scope.product);
         }else{
             $scope.product=null;
         }
@@ -216,9 +205,6 @@ myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamS
             $scope.order=null;
         }
     })
-    $scope.deleteOrder=function () {
-
-    }
 })
 //查询未付款页面
 myContrl.controller("nopayorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
@@ -231,7 +217,7 @@ myContrl.controller("nopayorderCtrl",function ($scope,$state,$stateParams,$httpP
     }).then(function (data) {
         if(data.data.code==200) {
             $scope.order=data.data.data;
-            console.log($scope.order);
+
         }else{
             $scope.order=null;
         }
@@ -249,6 +235,22 @@ myContrl.controller("nopayorderCtrl",function ($scope,$state,$stateParams,$httpP
                 $state.reload('homeSuccess.nopayorder');
             }else{
                console.log("error");
+            }
+        })
+    }
+    $scope.deleteOrder=function (orderid) {
+        $http({
+            url: "order_deleteOrder.json",
+            method: "post",
+            data: $httpParamSerializer({orderid:orderid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload('homeSuccess.nopayorder');
+            }else{
+                console.log("error");
             }
         })
     }
@@ -356,7 +358,6 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
     }).then(function (data) {
         if (data.data.code == 200) {
             $scope.order = data.data.data;
-            console.log($scope.order);
         } else {
             $scope.order = null;
         }
@@ -377,4 +378,21 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
             }
         })
     }
+})
+//个人信息页面控制器
+myContrl.controller("personinfoCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "user_getPersonInfo.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.user = data.data.data;
+            console.log($scope.user);
+        } else {
+            $scope.user = null;
+        }
+    })
 })

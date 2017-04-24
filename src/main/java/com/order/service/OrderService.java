@@ -53,5 +53,9 @@ public class OrderService {
 		}
 		return list2;
 	}
+	public void deleteOrder(Order order) {
+		// TODO Auto-generated method stub
+		orderDAO.delete(order);
+	}
 	
 }	
