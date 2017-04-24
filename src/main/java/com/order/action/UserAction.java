@@ -241,6 +241,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 		User user1 = userService.findByUserName(user.getUsername());
+		//System.out.println(user1);
 		String checkCode = CreateUUID.createUUID().toString().substring(0, 6);
 		Mail.send(user1.getEmail(), checkCode);
 		ServletActionContext.getRequest().getSession().setAttribute("username", user.getUsername());

@@ -1,16 +1,19 @@
 <meta charset="UTF-8">
 <div ng-controller="logSucCtrl">
-    <span class="btn btn-primary">{{username}}</span>
-    <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            查看订单 <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a ng-click="getAllOrder()">所有订单</a></li>
-            <li><a ng-click="getnopayOrder()">未支付订单</a></li>
-            <li><a ng-click="getpayOrder()" >已支付订单</a></li>
-        </ul>
-    </div>
+    <ul class="nav-box">
+        <li ng-click="getPersonInfo()">{{username}}</li>
+        <li><div class="btn-group">
+            <div type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                查看订单 <span class="caret"></span>
+            </div>
+            <ul class="dropdown-menu">
+                <li><a ng-click="getAllOrder()">所有订单</a></li>
+                <li><a ng-click="getnopayOrder()">未支付订单</a></li>
+                <li><a ng-click="getpayOrder()" >已支付订单</a></li>
+            </ul>
+        </div></li>
+    </ul>
+
 </div>
 
 <div ui-view></div>

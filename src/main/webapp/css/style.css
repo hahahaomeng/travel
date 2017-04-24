@@ -1,3 +1,10 @@
+.container{
+    max-width: 100% !important;
+}
+.carousel{
+    width:900px;
+    margin:auto;
+}
 .form-group{
     margin:0 0 30px 0!important;
     height:50px;
@@ -41,4 +48,40 @@
 .price{
     font-size: 24px;
     color: red;
+}
+.modal-content{
+    text-align: center;
+}
+.nav-box{
+    height:50px;
+    width: 100%;
+    background-color: #00c5ff;
+}
+.nav-box>li{
+    display: inline-block;
+    width: 85px;
+    height:50px;
+    text-align: center;
+    line-height:50px;
+    color: #fff;
+    float: right;
+    cursor: default;
+}
+.nav-box>li:hover{
+    background-color: #2a6496;
+}
+.btn-group.open .dropdown-toggle{
+    box-shadow: none!important;
+}
+.nav-box-first{
+    background-color: #00c5ff;
+    height:50px;
+    width:100%;
+}
+.nav-box-first>li{
+    height:50px;
+    display: inline-block;
+}
+.nav-box-first>li>img{
+    height:50px;
 }

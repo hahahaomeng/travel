@@ -117,6 +117,19 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
     $scope.cancel=function () {
         $location.path("/")
     }
+    $scope.getPersonInfo=function () {
+        $http({
+            url:"user_getPersonInfo.json",
+            method:"post",
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==300){
+                $scope.user=data.data.data;
+            }
+        })
+    }
 })
 //登陆成功控制器
 myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams) {
@@ -258,17 +271,17 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
     })
 })
 //忘记密码页面控制器
-myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
-    $scope.sendCode=function () {
+myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$timeout) {
+    $scope.modPasswordEmail=function () {
         $http({
-            url:"user_sendEmail.json",
+            url:"user_modPasswordEmail.json",
             method:"post",
-            data: $httpParamSerializer({email:$scope.email}),
+            data: $httpParamSerializer({username:$scope.username}),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
         }).then(function (data) {
-            console.log(data);
+            console.log(data.data.code);
         })
     }
     //驗證激活碼
@@ -306,22 +319,28 @@ myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpPa
             $(".email_err").popover('hide')
         }
     }
-    $scope.repassword=function () {
+    $scope.modPassword=function () {
         $http({
-            url: "user_rePassword.json",
+            url: "user_modPassword.json",
             method: "post",
-            data: $httpParamSerializer({repassword: $scope.password}),
+            data: $httpParamSerializer({password: $scope.password}),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
         }).then(function (data) {
             if (data.data.code == 200) {
-                $scope.order = data.data.data;
-                console.log($scope.order);
+                $('#myModal').modal('show');
+                console.log("修改成功");
             } else {
-                $scope.order = null;
+                console.log("修改失败");
             }
         })
+    }
+    $scope.homePage=function () {
+       $('#myModal').modal('hide');
+       var setTimeout=$timeout(function () {
+           $state.go('index')
+       },500);
     }
 })
 //付款页面控制器

@@ -1,11 +1,13 @@
 <meta charset="UTF-8">
-
 <div ng-controller="loginCtrl" id="login">
+    <ul class="nav-box-first">
+        <li><img src="/travel/images/logo.jpg" ng-click="cancel()"></li>
+    </ul>
     <form class="form-horizontal" role="form" name="myForm" novalidate>
         <div class="form-group">
             <input ng-model="user.username" type="hidden" /> <label
                 class="col-sm-3 control-label">用户名</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <div class="col-md-7">
                     <input type="text" class="form-control" id="username"
                             name="username" ng-model="username"
@@ -15,7 +17,7 @@
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">密&emsp;码</label>
-            <div class="col-sm-9">
+            <div class="col-sm-7">
                 <div class="col-md-7">
                     <input type="password" class="form-control" id="password"
                            name="password" ng-model="password" placeholder="请输入密码"
@@ -23,7 +25,8 @@
                 </div>
             </div>
         </div>
-        <a ui-sref="forgetpsd" class="btn-small" ng-click="float:right">忘记密码</a>
+        <div class="form-group"> <a ui-sref="forgetpsd" class="col-sm-3 control-label">忘记密码</a></div>
+
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-10">
                 <button type="button" class="btn btn-primary" ng-click="submits()">登录</button>
