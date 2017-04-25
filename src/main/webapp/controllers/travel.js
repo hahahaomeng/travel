@@ -119,7 +119,7 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
     }
 })
 //登陆成功控制器
-myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams) {
+myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams,$location) {
    $scope.username=$stateParams.username;
    $scope.getAllOrder=function () {
        $state.go('homeSuccess.order');
@@ -135,6 +135,12 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
     }
     $scope.getfinishOrder=function () {
         $state.go('homeSuccess.finishorder');
+    }
+    $scope.goindex=function () {
+        $state.go('homeSuccess.product',{username:$scope.username});
+    }
+    $scope.getRebackApp=function () {
+       $state.go('homeSuccess.appreback');
     }
 })
 //获取产品列表控制器
@@ -296,12 +302,10 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
     $scope.reback=function () {
         $('#apply').modal('hide');
         var tuiding=$timeout(function () {
-
-
         $http({
             url: "order_reback.json",
             method: "post",
-            data: $httpParamSerializer({orderid:$scope.orderid}),
+            data: $httpParamSerializer({orderid:$scope.orderid,appnotice:$scope.reason}),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
@@ -451,6 +455,22 @@ myContrl.controller("personinfoCtrl",function ($scope,$state,$stateParams,$httpP
             console.log($scope.user);
         } else {
             $scope.user = null;
+        }
+    })
+})
+//申请页面控制器
+myContrl.controller("apprebackCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $http({
+        url: "application_getRebackApp.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.product=data.data.data;
+        }else{
+            $scope.product=null;
         }
     })
 })

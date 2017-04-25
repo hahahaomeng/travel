@@ -67,7 +67,7 @@ public class Comment  implements java.io.Serializable {
     public void setCommentid(Integer commentid) {
         this.commentid = commentid;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
         @JoinColumn(name="orderid")
 
     public Order getOrder() {

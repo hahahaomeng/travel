@@ -67,5 +67,4 @@ public class OrderService {
 		order.setState("3");
 		orderDAO.attachDirty(order);
 	}
-	
 }	

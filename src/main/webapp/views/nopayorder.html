@@ -18,8 +18,8 @@
             <td>{{item.goplace}}</td>
             <td>{{item.price}}</td>
             <td>
-                <button ng-click="pay(item.orderid)">付款</button>
-                <button ng-click="deleteOrder(item.orderid)">取消订单</button>
+                <button class="btn btn-small btn-primary" ng-click="pay(item.orderid)">付款</button>
+                <button class="btn btn-small btn-primary" ng-click="deleteOrder(item.orderid)">取消订单</button>
             </td>
         </tr>
     </table>

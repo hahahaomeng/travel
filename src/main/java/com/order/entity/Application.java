@@ -1,9 +1,13 @@
 package com.order.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -60,7 +64,7 @@ public class Application  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id 
+    @Id @GeneratedValue(strategy=IDENTITY)
     
     @Column(name="appid", unique=true, nullable=false)
 
@@ -71,7 +75,7 @@ public class Application  implements java.io.Serializable {
     public void setAppid(Integer appid) {
         this.appid = appid;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
         @JoinColumn(name="apporderid", nullable=false)
 
     public Order getOrder() {

@@ -18,8 +18,8 @@
             <td>{{item.goplace}}</td>
             <td>{{item.price}}</td>
             <td>
-                <button class="btn btn-small ng-click="rebackparam(item.orderid)" data-toggle="modal" data-target="#apply">退订</button>
-                <button class="btn btn-small" ng-click="endOrder(item.orderid)">完成订单</button>
+                <button class="btn btn-small btn-primary" ng-click="rebackparam(item.orderid)" data-toggle="modal" data-target="#apply">申请退订</button>
+                <button class="btn btn-small btn-primary" ng-click="endOrder(item.orderid)">完成订单</button>
             </td>
         </tr>
     </table>
@@ -29,11 +29,14 @@
                 <div class="modal-header">
                     <h3>你确定要退订吗？</h3>
                 </div>
-
+                <div class="modal-body">
+                    <h4>退订原因:<input type="text" ng-model="reason"></h4>
+                </div>
+                <div>
                     <button type="button" class="tuiding-btn btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="tuiding-btn btn btn-primary" ng-click="reback()">确定</button>
-
                 </div>
+            </div>
         </div>
     </div>
 </div>

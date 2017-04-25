@@ -18,9 +18,11 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.order.bean.OrderDate;
+import com.order.entity.Application;
 import com.order.entity.Order;
 import com.order.entity.Product;
 import com.order.entity.User;
+import com.order.service.ApplicationService;
 import com.order.service.OrderService;
 import com.order.service.ProductService;
 
@@ -28,6 +30,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	private Order order;
 	private ProductService productService;
 	private OrderService orderService;
+	private ApplicationService applicationService;
 	@Override
 	public Order getModel() {
 		// TODO Auto-generated method stub
@@ -38,6 +41,9 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	}
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
+	}
+	public void setApplicationService(ApplicationService applicationService) {
+		this.applicationService = applicationService;
 	}
 	//用户下订单
 	public String applyOrder() throws IOException, ParseException{
@@ -126,7 +132,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		return NONE;
 	}
 	/**
-	 * 用户查看未付款订单
+	 * 用户查看未付款订单订单状态为0
 	 */
 	public String findnoPayOrder() throws IOException{
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -196,7 +202,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		return NONE;
 	}
 	/**
-	 * 完成订单
+	 * 完成订单订单状态为2
 	 * @throws IOException 
 	 */
 	public String endOrder() throws IOException{
@@ -229,7 +235,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		return NONE;
 	}
 	/**
-	 * 用户退订
+	 * 用户退订 订单状态为3
 	 */
 	public String reback() throws IOException{
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -237,8 +243,16 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json = new JSONObject();
 		String orderid=request.getParameter("orderid");
+		String appnotice=request.getParameter("appnotice");
+		//System.out.println(appnotice);
 		Order order=orderService.findOrderByid(Integer.parseInt(orderid));
-		//System.out.println(order);
+		Application application=new Application();
+		application.setAppnotice(appnotice);
+		application.setApptype("0");
+		application.setOrder(order);
+		application.setAppstate("0");
+		application.setAppdate(new Date());
+		applicationService.addApplication(application);
 		orderService.reback(order);
 		json.accumulate("code", 200);
 		response.getWriter().print(json.toString());

@@ -71,5 +71,8 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("homeSuccess.finishorder",{
             url:"/homeSuccess/finishorder",
             templateUrl:'views/finishorder.html'
+        }).state("homeSuccess.appreback",{
+            url:"/homeSuccess/appreback",
+            templateUrl:'views/appreback.html'
         })
     });
