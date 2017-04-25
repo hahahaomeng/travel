@@ -14,7 +14,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner"  role="listbox">
             <div class="item" ng-class="{true:'active',false:''}[$index==0]"  ng-repeat="item in product">
-                <img src={{item.imageurl}} ng-click="productdetail(item.productid)">
+                <img src={{item.imageurl}}  ng-click="productdetail(item.productid)">
                 <div class="carousel-caption">
                     {{item.productname}}
                 </div>
@@ -33,7 +33,7 @@
     </div>
     <div class="homeShow">
     <span class="product-content" ng-repeat="item in product" ng-click="productdetail(item.productid)">
-        <img src={{item.imageurl}}>
+        <img class="img-thumbnail" src={{item.imageurl}}>
         <span>{{item.productname}}</span>
     </span>
     </div>

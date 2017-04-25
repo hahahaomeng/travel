@@ -2,7 +2,7 @@
 <div ng-controller="logSucCtrl">
     <ul class="nav-box">
         <li class="logo" ng-click="goindex()"><img src="/travel/images/logo.jpg"></li>
-        <li ng-click="goPersonInfo()">{{username}}</li>
+        <li ng-click="goPersonInfo()" data-toggle="modal" data-target="#personinfo">{{username}}</li>
         <li ng-click="">我的评论</li>
         <li ng-click="getRebackApp()">我的申请</li>
         <li><div class="btn-group">
@@ -18,10 +18,28 @@
             </div>
         </li>
     </ul>
-    <div class="modal fade bs-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
+    <!--<div class="modal fade bs-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">-->
+        <!--<div class="modal-dialog modal-lg" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div>{{user.username}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="modal fade" id="personinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <div>{{user.username}}</div>
+                <div class="modal-header">
+                    <h3>个人信息</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>用户名:<input type="text" ng-model="user.username"></h4>
+                    <h4>电话:<input type="tel" ng-model="user.phone"></h4>
+                    <h4>邮箱:<input type="email" ng-model="user.email"></h4>
+                </div>
+                <div>
+                    <button type="button" class="tuiding-btn btn btn-success" data-dismiss="modal">取消</button>
+                    <button type="button" class="tuiding-btn btn btn-primary" data-dismiss="modal" ng-click="checkUserInfo()">确定修改</button>
+                </div>
             </div>
         </div>
     </div>

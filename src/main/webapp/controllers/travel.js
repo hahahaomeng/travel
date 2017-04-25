@@ -121,6 +121,19 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
 //登陆成功控制器
 myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams,$location) {
    $scope.username=$stateParams.username;
+    $http({
+        url: "user_getPersonInfo.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.user = data.data.data;
+        } else {
+            $scope.user = null;
+        }
+    })
    $scope.getAllOrder=function () {
        $state.go('homeSuccess.order');
    }
@@ -130,9 +143,6 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
    $scope.getpayOrder=function () {
        $state.go('homeSuccess.payedorder')
    }
-    $scope.goPersonInfo=function () {
-       $state.go('homeSuccess.personinfo');
-    }
     $scope.getfinishOrder=function () {
         $state.go('homeSuccess.finishorder');
     }
@@ -141,6 +151,18 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
     }
     $scope.getRebackApp=function () {
        $state.go('homeSuccess.appreback');
+    }
+    $scope.checkUserInfo=function () {
+        $http({
+            url: "user_modifyUserInfo.json",
+            method: "post",
+            data: $httpParamSerializer({username: $scope.user.username, phone: $scope.user.phone,email:$scope.user.email}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+
+        })
     }
 })
 //获取产品列表控制器
@@ -320,6 +342,22 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
 })
 //查询已完成页面
 myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.rate = 7;
+    $scope.max = 10;
+    $scope.isReadonly = false;
+
+    $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+    };
+
+    $scope.ratingStates = [
+        {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+        {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+        {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+        {stateOn: 'glyphicon-heart'},
+        {stateOff: 'glyphicon-off'}
+    ];
     $http({
         url: "order_finishOrder.json",
         method: "post",
@@ -333,6 +371,27 @@ myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$http
             $scope.order=null;
         }
     })
+    $scope.comment=function(orderid){
+        $scope.orderid=orderid;
+    }
+    $scope.commentOrder=function () {
+        $('#comment').modal('hide');
+        var pinglun=$timeout(function () {
+            $http({
+                url: "comment_addComment.json",
+                method: "post",
+                data: $httpParamSerializer({orderid:$scope.orderid,appnotice:$scope.reason}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                }
+            }).then(function (data) {
+                if(data.data.code==200) {
+                    $state.reload('homeSuccess.payedorder');
+                }else{
+                    console.log("error");
+                }
+            }) },500)
+    }
 })
 //忘记密码页面控制器
 myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$timeout) {
@@ -441,23 +500,6 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
         })
     }
 })
-//个人信息页面控制器
-myContrl.controller("personinfoCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
-    $http({
-        url: "user_getPersonInfo.json",
-        method: "post",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        }
-    }).then(function (data) {
-        if (data.data.code == 200) {
-            $scope.user = data.data.data;
-            console.log($scope.user);
-        } else {
-            $scope.user = null;
-        }
-    })
-})
 //申请页面控制器
 myContrl.controller("apprebackCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
     $http({
@@ -468,9 +510,9 @@ myContrl.controller("apprebackCtrl",function ($scope,$state,$stateParams,$httpPa
         }
     }).then(function (data) {
         if(data.data.code==200) {
-            $scope.product=data.data.data;
+            $scope.app=data.data.data;
         }else{
-            $scope.product=null;
+            $scope.app=null;
         }
     })
 })

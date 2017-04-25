@@ -22,9 +22,8 @@ public class ApplicationService {
 		// TODO Auto-generated method stub
 		List<Application> list=applicationDAO.findAll();
 		List<Application> list2=new ArrayList();
-		System.out.println(user.getUserid());
 		for(Application application:list){
-			if(application.getOrder().getState().equals("3")){
+			if((application.getOrder().getUser().getUserid()==user.getUserid())&&(application.getOrder().getState().equals("3"))){
 				list2.add(application);
 			}
 		}

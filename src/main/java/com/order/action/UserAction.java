@@ -228,6 +228,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		User user2=userService.findByUserId(user1.getUserid());
 		user2.setPhone(user.getPhone());
 		user2.setUsername(user.getUsername());
+		user2.setEmail(user.getEmail());
 		userService.update(user2);
 		JSONObject json = new JSONObject();
 		json.accumulate("code", 200);

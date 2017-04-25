@@ -3,12 +3,22 @@
     <table class="table table-bordered">
         <tr>
             <th>景点名</th>
-            <th>景点地点</th>
-            <th>出发时间</th>
-            <th>人数</th>
-            <th>出发地点</th>
             <th>价格</th>
-            <th>操作</th>
+            <th>人数</th>
+            <th>申请时间</th>
+            <th>退订原因</th>
+            <th>申请类型</th>
+            <th>状态</th>
+
+        </tr>
+        <tr ng-repeat="item in app">
+            <td>{{item.productname}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.gonumber}}</td>
+            <td>{{item.appdate}}</td>
+            <td>{{item.appnotice}}</td>
+            <td>{{item.apptype}}</td>
+            <td>{{item.appstate}}</td>
         </tr>
     </table>
 </div>
