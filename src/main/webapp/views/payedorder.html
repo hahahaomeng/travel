@@ -13,11 +13,27 @@
         <tr ng-repeat="item in order">
             <td>{{item.productname}}</td>
             <td>{{item.proplace}}</td>
-            <td>{{item.godata}}</td>
+            <td>{{item.godata}}</td>*
             <td>{{item.gonumber}}</td>
             <td>{{item.goplace}}</td>
             <td>{{item.price}}</td>
-
+            <td>
+                <button class="btn btn-small ng-click="rebackparam(item.orderid)" data-toggle="modal" data-target="#apply">退订</button>
+                <button class="btn btn-small" ng-click="endOrder(item.orderid)">完成订单</button>
+            </td>
         </tr>
     </table>
+    <div class="modal fade" id="apply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>你确定要退订吗？</h3>
+                </div>
+
+                    <button type="button" class="tuiding-btn btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="tuiding-btn btn btn-primary" ng-click="reback()">确定</button>
+
+                </div>
+        </div>
+    </div>
 </div>

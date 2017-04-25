@@ -68,5 +68,8 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("homeSuccess.personinfo",{
             url:"/homeSuccess/personinfo",
             templateUrl:'views/personinfo.html'
+        }).state("homeSuccess.finishorder",{
+            url:"/homeSuccess/finishorder",
+            templateUrl:'views/finishorder.html'
         })
     });

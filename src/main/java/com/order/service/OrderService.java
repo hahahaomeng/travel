@@ -57,5 +57,15 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		orderDAO.delete(order);
 	}
+	public void endOrder(Order order) {
+		// TODO Auto-generated method stub
+		order.setState("2");
+		orderDAO.attachDirty(order);
+	}
+	public void reback(Order order) {
+		// TODO Auto-generated method stub
+		order.setState("3");
+		orderDAO.attachDirty(order);
+	}
 	
 }	

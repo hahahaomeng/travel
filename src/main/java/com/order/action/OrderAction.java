@@ -172,6 +172,48 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		return NONE;
 	}
 	/**
+	 * 用户查看已完成订单
+	 * @throws IOException 
+	 */
+	public String finishOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user = (User) request.getSession().getAttribute("user");
+		//System.out.println(user);
+		List<OrderDate> orders=orderService.findOrdByUser(user);
+		List<OrderDate> orders1=new ArrayList<OrderDate>();
+		for(OrderDate orderDate:orders){
+			if(orderDate.getState().equals("2")){
+				orders1.add(orderDate);
+			}
+		}
+//		System.out.println(orders1.size());
+ 		json.accumulate("code", 200);
+		json.accumulate("data", orders1);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 完成订单
+	 * @throws IOException 
+	 */
+	public String endOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String orderid=request.getParameter("orderid");
+		Order order=orderService.findOrderByid(Integer.parseInt(orderid));
+		//System.out.println(order);
+		orderService.endOrder(order);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	
+	/**
 	 * 删除订单
 	 * @throws IOException 
 	 */
@@ -182,6 +224,22 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		JSONObject json = new JSONObject();
 		Order order=orderService.findOrderByid(Integer.parseInt(request.getParameter("orderid")));
 		orderService.deleteOrder(order);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 用户退订
+	 */
+	public String reback() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String orderid=request.getParameter("orderid");
+		Order order=orderService.findOrderByid(Integer.parseInt(orderid));
+		//System.out.println(order);
+		orderService.reback(order);
 		json.accumulate("code", 200);
 		response.getWriter().print(json.toString());
 		return NONE;

@@ -133,6 +133,9 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
     $scope.goPersonInfo=function () {
        $state.go('homeSuccess.personinfo');
     }
+    $scope.getfinishOrder=function () {
+        $state.go('homeSuccess.finishorder');
+    }
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
@@ -256,7 +259,7 @@ myContrl.controller("nopayorderCtrl",function ($scope,$state,$stateParams,$httpP
     }
 })
 //查询已付款页面
-myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$timeout) {
     $http({
         url: "order_findPayOrder.json",
         method: "post",
@@ -267,6 +270,61 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
         if(data.data.code==200) {
             $scope.order=data.data.data;
 
+        }else{
+            $scope.order=null;
+        }
+    })
+    $scope.endOrder=function (orderid) {
+        $http({
+            url: "order_endOrder.json",
+            method: "post",
+            data: $httpParamSerializer({orderid:orderid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload('homeSuccess.payedorder');
+            }else{
+                console.log("error");
+            }
+        })
+    }
+    $scope.rebackparam=function(orderid){
+        $scope.orderid=orderid;
+    }
+    $scope.reback=function () {
+        $('#apply').modal('hide');
+        var tuiding=$timeout(function () {
+
+
+        $http({
+            url: "order_reback.json",
+            method: "post",
+            data: $httpParamSerializer({orderid:$scope.orderid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload('homeSuccess.payedorder');
+            }else{
+                console.log("error");
+            }
+        }) },500)
+    }
+})
+//查询已完成页面
+myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "order_finishOrder.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.order=data.data.data;
         }else{
             $scope.order=null;
         }
@@ -362,7 +420,7 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
             $scope.order = null;
         }
     })
-    $scope.paymoney=function (orderid) {
+    $scope.payMoney=function (orderid) {
         $http({
             url: "order_payOrder.json",
             method: "post",
@@ -372,7 +430,7 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
             }
         }).then(function (data) {
             if(data.data.code==200) {
-                $state.reload('homeSuccess.nopayorder');
+                $state.go('homeSuccess');
             }else{
                 console.log("error");
             }

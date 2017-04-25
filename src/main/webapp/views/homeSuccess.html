@@ -1,7 +1,10 @@
 <meta charset="UTF-8">
 <div ng-controller="logSucCtrl">
     <ul class="nav-box">
+        <li class="logo"><img src="/travel/images/logo.jpg"></li>
         <li ng-click="goPersonInfo()">{{username}}</li>
+        <li ng-click="">我的评论</li>
+        <li ng-click="">我的申请</li>
         <li><div class="btn-group">
             <div type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 查看订单 <span class="caret"></span>
@@ -10,8 +13,10 @@
                 <li><a ng-click="getAllOrder()">所有订单</a></li>
                 <li><a ng-click="getnopayOrder()">未支付订单</a></li>
                 <li><a ng-click="getpayOrder()" >已支付订单</a></li>
+                <li><a ng-click="getfinishOrder()">已完成订单</a></li>
             </ul>
-        </div></li>
+            </div>
+        </li>
     </ul>
     <div class="modal fade bs-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">

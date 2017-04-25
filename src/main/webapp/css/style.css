@@ -1,3 +1,7 @@
+.product{
+    width: 1600px;
+    margin:0 auto;
+}
 .container{
     max-width: 100% !important;
 }
@@ -40,10 +44,15 @@
 .protop img{
     height:300px;
     display: inline-block;
+    margin-top:-190px;
 }
 .prosimple{
     display: inline-block;
     margin-left:70px ;
+}
+.homeShow{
+
+    display: flex;
 }
 .price{
     font-size: 24px;
@@ -84,4 +93,19 @@
 }
 .nav-box-first>li>img{
     height:50px;
+}
+.logo{
+    float:left!important;
+    width: 0px!important;
+}
+.logo:hover{
+    color: #00c5ff !important;
+}
+.logo>img{
+    height:50px;
+    margin-top: -2px;
+}
+.tuiding-btn{
+    margin-top:10px;
+    margin-bottom: 10px;
 }
