@@ -97,7 +97,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			ServletActionContext.getRequest().getSession().setAttribute("user", user1);
 		} else {
 			json.accumulate("code", 300);
-			json.accumulate("errMsg", "username or password is wrong");
+			json.accumulate("errMsg", "用户名或密码错误");
 		}
 		out.println(json.toString());
 		out.flush();

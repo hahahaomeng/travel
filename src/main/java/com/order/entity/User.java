@@ -170,12 +170,4 @@ public class User  implements java.io.Serializable {
 //        this.orders = orders;
 //    }
 //   
-
-
-
-
-
-
-
-
 }

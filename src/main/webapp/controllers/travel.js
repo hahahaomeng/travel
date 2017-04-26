@@ -2,7 +2,7 @@
  * Created by fanhao on 2017/4/11.
  */
 //登陆控制器
-var myContrl=angular.module('controllers',[]);
+var myContrl=angular.module('controllers',['ui.bootstrap']);
 myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$state) {
     $scope.submits = function () {
         $http({
@@ -17,7 +17,7 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
                 $scope.user=data.data.data;
                 $state.go('homeSuccess.product',{username:$scope.user.username});
             }else{
-                $state.go('index');
+                $scope.errmsg=data.data.errMsg;
             }
         })
     };
@@ -342,8 +342,8 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
 })
 //查询已完成页面
 myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
-    $scope.rate = 7;
-    $scope.max = 10;
+    $scope.rate = 0;
+    $scope.max = 5;
     $scope.isReadonly = false;
 
     $scope.hoveringOver = function(value) {
