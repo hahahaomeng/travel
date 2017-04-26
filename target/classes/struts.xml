@@ -12,5 +12,7 @@
 		</action>
 		<action name="application_*" class="com.order.action.ApplicationAction" method="{1}">
 		</action>
+		<action name="comment_*" class="com.order.action.CommentAction" method="{1}">
+		</action>
 	</package>
 </struts>

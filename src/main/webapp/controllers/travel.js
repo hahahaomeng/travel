@@ -341,7 +341,7 @@ myContrl.controller("payedorderCtrl",function ($scope,$state,$stateParams,$httpP
     }
 })
 //查询已完成页面
-myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$timeout) {
     $scope.rate = 0;
     $scope.max = 5;
     $scope.isReadonly = false;
@@ -380,7 +380,7 @@ myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$http
             $http({
                 url: "comment_addComment.json",
                 method: "post",
-                data: $httpParamSerializer({orderid:$scope.orderid,appnotice:$scope.reason}),
+                data: $httpParamSerializer({order:$scope.orderid,content:$scope.content,commenturl:$scope.commenturl,commentstate:$scope.rate}),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
                 }

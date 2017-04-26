@@ -7,7 +7,7 @@ app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
    app.config(function ($stateProvider,$urlRouterProvider) {
-       $urlRouterProvider.otherwise('/index');
+        //$urlRouterProvider.otherwise('/index');
         $stateProvider.state("index", {
             url:"/index",
             views:{

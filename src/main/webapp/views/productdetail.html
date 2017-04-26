@@ -3,12 +3,10 @@
     <div class="protop">
         <img src={{product.imageurl}}>
         <div class="prosimple">
-            <h1>{{product.productname}}</h1>
+            <h1 class="prodname">{{product.productname}}</h1>
             <div class="price">￥{{product.price}}</div>
             <div class="detail">{{product.prodetail}}</div>
-            <div class="input-group form-group">
-                出游人数
-                <input type="number" min="1" class="form-control"  id="gonumber" name="gonumber" ng-model="gonumber"/>
+            <div class="tourist-number form-group">出游人数<input  type="number" min="1" class="form-control"  id="gonumber" name="gonumber" ng-model="gonumber"/>
             </div>
             <div>
                 出发日期
@@ -21,5 +19,4 @@
     <div>
         <span>{{product.prodescribe}}</span>
     </div>
-
 </div>

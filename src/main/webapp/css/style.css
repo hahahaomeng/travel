@@ -1,13 +1,18 @@
+body{
+    position: relative;
+}
 .product{
     width: 1600px;
     margin:0 auto;
 }
 .container{
-    max-width: 100% !important;
+    width: 100% !important;
+    padding:0;
 }
 .carousel{
-    width:900px;
+    width:810px;
     margin:auto;
+    display: inline-block;
 }
 .form-group{
     margin:0 0 30px 0!important;
@@ -37,22 +42,41 @@
     display: inline-block;
 }
 .protop{
-    width:80%;
+    width:1020px;
     height:300px;
-    margin:0  auto;
+    margin:20px  auto;
 }
 .protop img{
     height:300px;
     display: inline-block;
-    margin-top:-190px;
 }
 .prosimple{
-    display: inline-block;
-    margin-left:70px ;
+    float: right;
+    margin-left: 30px;
+    padding-left: 20px;
+    width: 400px;
+    height: 300px;
+}
+.prodname{
+    width:100%;
+    background-color: rgba(255,232,241,0.19);
+}
+.detail{
+    font-size: large;
+}
+.tourist-number{
+    width: 100%;
+}
+.tourist-number input{
+    float: none!important;
+    width: 100px!important;
+    display: inline-block!important;
 }
 .homeShow{
-
     display: flex;
+    width:980px;
+    margin: 10px auto;
+    justify-content: space-between;
 }
 .price{
     font-size: 24px;
@@ -108,4 +132,22 @@
 .tuiding-btn{
     margin-top:10px;
     margin-bottom: 10px;
+}
+.fileinput{
+    display: inline-block!important;
+}
+.comment{
+    text-align: left;
+    padding-left: 150px;
+}
+.nav-menu{
+    position: relative;
+    width:980px;
+    margin:0 auto;
+}
+.nav{
+    width: 160px;
+    margin-right: 10px;
+    display: inline-block;
+    float: left;
 }
