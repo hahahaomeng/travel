@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal-body comment">
                     <div>
-                        <h4>上传图片:<input class="fileinput" type="file" id="exampleInputFile" ng-model="commenturl"></h4>
+                        <h4>上传图片:<input ng-model="commentURL" class="fileinput" type="file" id="exampleInputFile"></h4>
                         <h4>评论:<input type="text"  ng-model="content"></h4>
                         <h4>评分:<span uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
                         </h4>

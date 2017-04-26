@@ -29,7 +29,7 @@ public class UploadFile {
     //第一种方式: 指定具体的要上传的zone
     //注：该具体指定的方式和以下自动识别的方式选择其一即可
     //要上传的空间(bucket)的存储区域为华东时
-    private static Zone z = Zone.zone0();
+    private static Zone z = Zone.zone2();
     //要上传的空间(bucket)的存储区域为华北时
     // Zone z = Zone.zone1();
     //要上传的空间(bucket)的存储区域为华南时

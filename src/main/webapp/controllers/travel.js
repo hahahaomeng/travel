@@ -152,6 +152,9 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
     $scope.getRebackApp=function () {
        $state.go('homeSuccess.appreback');
     }
+    $scope.checkComment=function () {
+        $state.go('homeSuccess.comment');
+    }
     $scope.checkUserInfo=function () {
         $http({
             url: "user_modifyUserInfo.json",
@@ -164,6 +167,7 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
 
         })
     }
+
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
@@ -377,16 +381,27 @@ myContrl.controller("finishorderCtrl",function ($scope,$state,$stateParams,$http
     $scope.commentOrder=function () {
         $('#comment').modal('hide');
         var pinglun=$timeout(function () {
+            var file=angular.element("#exampleInputFile")[0].files[0];
+            var data=new FormData();
+            data.append("commenturl",file);
+            data.append("orderid",$scope.orderid);
+            data.append("content",$scope.content);
+            data.append("commentstate",$scope.rate);
+            //data.append("commentdate",new Date());
+
             $http({
                 url: "comment_addComment.json",
                 method: "post",
-                data: $httpParamSerializer({order:$scope.orderid,content:$scope.content,commenturl:$scope.commenturl,commentstate:$scope.rate}),
+                //data: $httpParamSerializer({orderid:$scope.orderid}),
+                data:data,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-                }
+                     // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                    'Content-Type':undefined
+                },
+                transformRequest:angular.identity
             }).then(function (data) {
                 if(data.data.code==200) {
-                    $state.reload('homeSuccess.payedorder');
+                    $state.reload('homeSuccess.finishorder');
                 }else{
                     console.log("error");
                 }
@@ -513,6 +528,22 @@ myContrl.controller("apprebackCtrl",function ($scope,$state,$stateParams,$httpPa
             $scope.app=data.data.data;
         }else{
             $scope.app=null;
+        }
+    })
+})
+//评论页面控制器
+myContrl.controller("commentCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $http({
+        url: "comment_checkComment.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.comment=data.data.data;
+        }else{
+            $scope.comment=null;
         }
     })
 })

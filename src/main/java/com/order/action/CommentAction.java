@@ -2,6 +2,7 @@ package com.order.action;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,17 +15,19 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.order.entity.Comment;
 import com.order.entity.Order;
+import com.order.entity.User;
 import com.order.service.CommentService;
 import com.order.service.OrderService;
+import com.order.util.UploadFile;
 
 public class CommentAction extends ActionSupport implements ModelDriven<Comment> {
-	private Comment comment;
+	private Comment comment=new Comment();
 	private CommentService commentService;
 	private OrderService orderService;
 	@Override
 	public Comment getModel() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.comment;
 	}
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
@@ -35,19 +38,40 @@ public class CommentAction extends ActionSupport implements ModelDriven<Comment>
 	/**
 	 * 添加评论
 	 */
-	public void addComment() throws IOException{
+	public String addComment() throws IOException{
 		HttpServletResponse response=ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
-		response.setContentType("text/html);charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json=new JSONObject();
-		Order order=this.comment.getOrder();
-		System.out.println(order);
-		System.out.println(this.comment.getCommentstate());
-		//this.comment.setCommentdate(new Date());
-		//commentService.addComment(this.comment);
+		String path=comment.getCommenturl();
+		Comment a=new Comment();
+		a.setCommentdate(new Date());
+		a.setCommentstate(this.comment.getCommentstate());
+		a.setContent(this.comment.getContent());
+		Order order=orderService.findOrderByid(Integer.parseInt(request.getParameter("orderid")));
+		a.setOrder(order);
+		a.setCommenturl(UploadFile.upload(path));
+		commentService.addComment(a);
+		orderService.comment(order);
 		json.accumulate("code", 200);
-		json.accumulate("data", null);
+		json.accumulate("data", "check code is wrong");
 		response.getWriter().print(json.toString());
+		return NONE;
 	}
-
+	/**
+	 * 用户查看自己的评论
+	 */
+	public String checkComment() throws IOException{
+		HttpServletResponse response=ServletActionContext.getResponse();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json=new JSONObject();
+		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(user.getUserid());
+		List<Comment> list2=commentService.findCommentByUser(user);
+		json.accumulate("code", 200);
+		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 }

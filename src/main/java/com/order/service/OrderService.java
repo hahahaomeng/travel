@@ -67,4 +67,12 @@ public class OrderService {
 		order.setState("3");
 		orderDAO.attachDirty(order);
 	}
+	/**
+	 * 用户评论
+	 */
+	public void comment(Order order) {
+		// TODO Auto-generated method stub
+		order.setState("4");
+		orderDAO.attachDirty(order);
+	}
 }	

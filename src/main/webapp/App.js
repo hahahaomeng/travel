@@ -74,5 +74,8 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("homeSuccess.appreback",{
             url:"/homeSuccess/appreback",
             templateUrl:'views/appreback.html'
+        }).state("homeSuccess.comment",{
+            url:"/homeSuccess/comment",
+            templateUrl:'views/comment.html'
         })
     });

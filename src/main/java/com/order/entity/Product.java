@@ -119,7 +119,7 @@ public class Product  implements java.io.Serializable {
         this.price = price;
     }
     
-    @Column(name="imageurl", nullable=false, length=45)
+    @Column(name="imageurl", nullable=false, length=120)
 
     public String getImageurl() {
         return this.imageurl;
