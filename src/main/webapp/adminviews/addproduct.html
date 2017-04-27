@@ -1,3 +1,42 @@
 <div>
-
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">景点名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="productname" palceholder="请输入景点名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">景点描述</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="prodescribe" palceholder="请输入景点描述">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">景点价格</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" ng-model="price" palceholder="请输入景点价格">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">景点图片</label>
+            <div class="col-sm-10">
+                <input type="file" id="protupian" ng-model="imageurl">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
 </div>
