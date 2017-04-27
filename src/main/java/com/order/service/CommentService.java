@@ -23,6 +23,12 @@ public class CommentService {
 	public List<Comment> findCommentByUser(User user) {
 		// TODO Auto-generated method stub
 		List<Comment> list=commentDAO.findAll();
-		return list;
+		List<Comment> list2=new ArrayList();
+		for(Comment comment:list){
+			if(comment.getOrder().getUser().getUserid()==user.getUserid()){
+				list2.add(comment);
+			}
+		}
+		return list2;
 	}
 }

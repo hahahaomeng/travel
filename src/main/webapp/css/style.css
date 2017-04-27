@@ -88,7 +88,7 @@ body{
 .nav-box{
     height:50px;
     width: 100%;
-    background-color: #00c5ff;
+    background-color: #ed5565;
 }
 .nav-box>li{
     display: inline-block;
@@ -101,7 +101,7 @@ body{
     cursor: default;
 }
 .nav-box>li:hover{
-    background-color: #2a6496;
+    background-color: #da4453;
 }
 .btn-group.open .dropdown-toggle{
     box-shadow: none!important;
@@ -114,6 +114,15 @@ body{
 .nav-box-first>li{
     height:50px;
     display: inline-block;
+    line-height:50px;
+    float: right;
+    text-align: center;
+    width:100px;
+    color: #fff;
+}
+.nav-box-first>li:hover{
+    background-color:#1b6d85;
+    cursor: default;
 }
 .nav-box-first>li>img{
     height:50px;
@@ -150,4 +159,10 @@ body{
     margin-right: 10px;
     display: inline-block;
     float: left;
+}
+.admingo{
+    float: left;
+    width:100px;
+    margin-left:30px;
+    display: inline-block;
 }

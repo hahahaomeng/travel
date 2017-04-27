@@ -77,5 +77,9 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("homeSuccess.comment",{
             url:"/homeSuccess/comment",
             templateUrl:'views/comment.html'
+        }).state("adminSuccess", {
+            url: '/homeSuccess?username',
+            templateUrl: 'adminviews/adminSuccess.html',
+            controller: 'adminlogSucCtrl'
         })
     });

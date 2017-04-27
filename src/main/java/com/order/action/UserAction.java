@@ -91,12 +91,16 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		JSONObject json = new JSONObject();
 		String pass=MD5.encoderByMd5(this.user.getPassword());
 		User user1=userService.findByUserName(this.user.getUsername());
-		if (user1!=null&&pass.equals(user1.getPassword())) {
+		if (user1!=null&&pass.equals(user1.getPassword())&&user1.getType().equals("0")) {
 			json.accumulate("code", 200);
 			json.accumulate("data", user1);
 			ServletActionContext.getRequest().getSession().setAttribute("user", user1);
-		} else {
+		} else if(user1!=null&&pass.equals(user1.getPassword())&&user1.getType().equals("1")) {
 			json.accumulate("code", 300);
+			json.accumulate("data", user1);
+			ServletActionContext.getRequest().getSession().setAttribute("user", user1);
+		}else{
+			json.accumulate("code", 500);
 			json.accumulate("errMsg", "用户名或密码错误");
 		}
 		out.println(json.toString());

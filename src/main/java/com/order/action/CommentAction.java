@@ -1,6 +1,7 @@
 package com.order.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import net.sf.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.order.bean.CommentDate;
 import com.order.entity.Comment;
 import com.order.entity.Order;
 import com.order.entity.User;
@@ -67,8 +69,19 @@ public class CommentAction extends ActionSupport implements ModelDriven<Comment>
 		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json=new JSONObject();
 		User user = (User) request.getSession().getAttribute("user");
-		System.out.println(user.getUserid());
-		List<Comment> list2=commentService.findCommentByUser(user);
+		List<Comment> list=commentService.findCommentByUser(user);
+		List<CommentDate> list2=new ArrayList();
+		for(Comment comment:list){
+			if(comment.getOrder().getState().equals("4")){
+				CommentDate a=new CommentDate();
+				a.setProductname(comment.getOrder().getProduct().getProductname());
+				a.setCommentstate(comment.getCommentstate());
+				a.setCommenturl(comment.getCommenturl());
+				a.setContent(comment.getContent());
+				a.setCommentdate(comment.getCommentdate().toString());
+				list2.add(a);
+			}
+		}
 		json.accumulate("code", 200);
 		json.accumulate("data", list2);
 		response.getWriter().print(json.toString());

@@ -2,9 +2,18 @@
 <div ng-controller="commentCtrl">
     <table class="table table-bordered table-hover">
         <tr>
-            hihihihi
-
+            <th>景点名</th>
+            <th>评论日期</th>
+            <th>评论图片</th>
+            <th>评论</th>
+            <th>满意程度</th>
         </tr>
-
+        <tr  ng-repeat="item in comment">
+            <td>{{item.productname}}</td>
+            <td>{{item.commentdate}}</td>
+            <td><img class="img-responsive" src={{item.commenturl}} width="60px" height="33px"></td>
+            <td>{{item.content}}</td>
+            <td>{{item.commentstate}}</td>
+        </tr>
     </table>
 </div>

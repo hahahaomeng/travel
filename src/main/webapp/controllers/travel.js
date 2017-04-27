@@ -16,6 +16,9 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
             if(data.data.code==200) {
                 $scope.user=data.data.data;
                 $state.go('homeSuccess.product',{username:$scope.user.username});
+            }else if(data.data.code==300){
+                $scope.user=data.data.data;
+                $state.go('adminSuccess',{username:$scope.user.username});
             }else{
                 $scope.errmsg=data.data.errMsg;
             }
@@ -26,7 +29,7 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
     }
 });
 //注册控制器
-myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$location) {
+myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$state) {
     $scope.name_err=false;
 	$scope.register=function () {
 
@@ -115,7 +118,7 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
         }
     }
     $scope.cancel=function () {
-        $location.path("/")
+        $state.go('index');
     }
 })
 //登陆成功控制器
@@ -546,4 +549,12 @@ myContrl.controller("commentCtrl",function ($scope,$state,$stateParams,$httpPara
             $scope.comment=null;
         }
     })
+})
+
+//管理员登录成功控制器
+myContrl.controller("adminlogSucCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $scope.username=$stateParams.username;
+    $scope.adminlogout=function () {
+        $state.go('index');
+    }
 })
