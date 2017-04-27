@@ -1,0 +1,30 @@
+.out-container{
+    width:1100px;
+    margin:0 auto;
+    margin-top:40px;
+}
+.detail{
+    background-color: #f9f9f9;
+}
+
+.date{
+    margin:0 !important;
+    display: inline;
+    width:150px;
+}
+.form-control{
+    height:30px !important;
+    margin-left:20px !important;
+}
+.content-container .nav{
+    width:100% !important;
+    text-align: center;
+}
+.content-container .nav li a{
+    color:black !important;
+    width:100px !important;
+}
+.content-container .panel h5{
+    margin-top:80px;
+    line-height: 30px;
+}

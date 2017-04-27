@@ -1,22 +1,48 @@
 <meta charset="UTF-8">
 <div ng-controller="prodetailCtrl">
-    <div class="protop">
-        <img src={{product.imageurl}}>
-        <div class="prosimple">
-            <h1 class="prodname">{{product.productname}}</h1>
-            <div class="price">￥{{product.price}}</div>
-            <div class="detail">{{product.prodetail}}</div>
-            <div class="tourist-number form-group">出游人数<input  type="number" min="1" class="form-control"  id="gonumber" name="gonumber" ng-model="gonumber"/>
+    <div class="panel panel-default out-container">
+        <div class="panel-body">
+            <div class="protop">
+                <img style="margin-top:25px;" src={{product.imageurl}}>
+                <div class="prosimple">
+                    <h1 class="prodname">{{product.productname}}</h1>
+                    <div class="price">￥{{product.price}}</div>
+                    <div class="detail">{{product.prodescribe}}</div>
+                    <div class="tourist-number form-group">出游人数<input  type="number" min="1" class="form-control"  id="gonumber" name="gonumber" ng-model="gonumber"/>
+                    </div>
+                    <div>
+                        出发日期
+                        <input type="date" value="2015-09-24" ng-model="godate" class="form-control date"/>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top:20px;" ng-click="applyorder()">立即预定</button>
+                </div>
             </div>
-            <div>
-                出发日期
-                <input type="date" value="2015-09-24" ng-model="godate"/>
+            <hr>
+            <div class="content-container">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">景点详情</a></li>
+                    <li role="presentation"><a href="#must-know" aria-controls="must-know" role="tab" data-toggle="tab">用户须知</a></li>
+                    <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">驴友点评</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="detail">
+                        <div class="panel panel-default" style="border-top:0px;">
+                            <div class="panel-body">
+                                <h5>{{product.prodetail}}</h5>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="must-know">
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="comment">
+
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-primary"  ng-click="applyorder()">立即预定</button>
         </div>
-    </div>
-    <hr>
-    <div>
-        <span>{{product.prodescribe}}</span>
     </div>
 </div>

@@ -41,6 +41,8 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		String path = product.getImageurl();
 		ActionContext ac = ActionContext.getContext();
 		this.product.setImageurl(UploadFile.upload(path));
+		this.product.setProstate("0");
+		this.product.setDiscount(1.0);
 		productService.addProduct(product);
 		PrintWriter out = response.getWriter();
 		json.accumulate("code", 200);

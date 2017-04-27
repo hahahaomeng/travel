@@ -16,7 +16,6 @@ body{
 }
 .form-group{
     margin:0 0 30px 0!important;
-    height:50px;
 }
 .registererr{
     color: red;
@@ -43,7 +42,7 @@ body{
 }
 .protop{
     width:1020px;
-    height:300px;
+    height:350px;
     margin:20px  auto;
 }
 .protop img{
@@ -59,13 +58,14 @@ body{
 }
 .prodname{
     width:100%;
-    background-color: rgba(255,232,241,0.19);
 }
 .detail{
-    font-size: large;
+    font-size: 16px;
+    padding:10px;
 }
 .tourist-number{
     width: 100%;
+    margin-top:20px !important;
 }
 .tourist-number input{
     float: none!important;
@@ -189,4 +189,9 @@ body{
     line-height: 63px;
     padding: 0;
     color: #fff;
+}
+.welcome2{
+    width:850px;
+    position:absolute;
+    margin-left: 350px;
 }

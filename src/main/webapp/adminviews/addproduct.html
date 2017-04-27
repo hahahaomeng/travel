@@ -1,41 +1,82 @@
-<div>
-    <form class="form-horizontal">
+<div ng-controller="addproductCtrl" class="welcome2">
+    <form class="form-horizontal" role="form" name="myForm" novalidate>
         <div class="form-group">
-            <label  class="col-sm-2 control-label">景点名称</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="productname" palceholder="请输入景点名称">
-            </div>
-        </div>
-        <div class="form-group">
-            <label  class="col-sm-2 control-label">景点描述</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="prodescribe" palceholder="请输入景点描述">
-            </div>
-        </div>
-        <div class="form-group">
-            <label  class="col-sm-2 control-label">景点价格</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" ng-model="price" palceholder="请输入景点价格">
-            </div>
-        </div>
-        <div class="form-group">
-            <label  class="col-sm-2 control-label">景点图片</label>
-            <div class="col-sm-10">
-                <input type="file" id="protupian" ng-model="imageurl">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Remember me
-                    </label>
+            <label class="col-sm-3 control-label">景点名称</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <input type="text" class="form-control"
+                           name="productname" ng-model="productname"
+                           placeholder="请输入景点名称">
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Sign in</button>
+            <label class="col-sm-3 control-label">景点描述</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="3" ng-model="prodescribe" placeholder="请输入景点描述"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点价格</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <input type="number" class="form-control"
+                           ng-model="price"
+                           placeholder="请输入景点价格">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点图片</label>
+            <div class="col-sm-7">
+                <div class="col-md-7">
+                    <input type="file" class="form-control" id="productimage"
+                           ng-model="imageurl">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点地址</label>
+            <div class="col-sm-7">
+                <div class="col-md-7">
+                    <input type="text" class="form-control"
+                           ng-model="proplace"
+                           placeholder="请输入景点地址">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">出发地址</label>
+            <div class="col-sm-7">
+                <div class="col-md-7">
+                    <input type="text" class="form-control"
+                           ng-model="goplace"
+                           placeholder="请输入景点出发地址">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点详情</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="4" ng-model="prodetail" placeholder="请输入景点详情"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">酒店详情</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="2" ng-model="hoteldetail" placeholder="请输入酒店详情"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-8" style="text-align: center">
+                <button type="button" class="btn btn-primary" ng-click="canceladd()">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="addpro()">添加</button>
             </div>
         </div>
     </form>

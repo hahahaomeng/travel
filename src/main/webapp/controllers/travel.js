@@ -571,3 +571,38 @@ myContrl.controller("adminlogSucCtrl",function ($scope,$state,$stateParams,$http
         $state.go('index');
     }
 })
+myContrl.controller("addproductCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $scope.canceladd=function () {
+        $state.go('adminSuccess.welcome');
+    }
+    $scope.addpro=function () {
+        var file = angular.element("#productimage")[0].files[0];
+        var data = new FormData();
+        data.append("imageurl", file);
+        data.append("productname", $scope.productname);
+        data.append("prodescribe", $scope.prodescribe);
+        data.append("price", $scope.price);
+        data.append("proplace", $scope.proplace);
+        data.append("goplace", $scope.goplace);
+        data.append("prodetail", $scope.prodetail);
+        data.append("hoteldetail", $scope.hoteldetail);
+
+        $http({
+            url: "product_addProduct.json",
+            method: "post",
+            //data: $httpParamSerializer({orderid:$scope.orderid}),
+            data: data,
+            headers: {
+                // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                'Content-Type': undefined
+            },
+            transformRequest: angular.identity
+        }).then(function (data) {
+            if (data.data.code == 200) {
+                $state.go('adminSuccess.welcome');
+            } else {
+                console.log("error");
+            }
+        })
+    }
+})
