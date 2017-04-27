@@ -18,7 +18,7 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
                 $state.go('homeSuccess.product',{username:$scope.user.username});
             }else if(data.data.code==300){
                 $scope.user=data.data.data;
-                $state.go('adminSuccess',{username:$scope.user.username});
+                $state.go('adminSuccess.welcome',{username:$scope.user.username});
             }else{
                 $scope.errmsg=data.data.errMsg;
             }
@@ -30,7 +30,8 @@ myContrl.controller("loginCtrl",function ($scope,$httpParamSerializer,$http,$sta
 });
 //注册控制器
 myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$state) {
-    $scope.name_err=false;
+    $scope.name_err=true;
+    $scope.isdisabled=true;
 	$scope.register=function () {
 
 		$http({
@@ -45,7 +46,6 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
         })
     }
     $scope.checkUserName=function () {
-
 		$http({
             url:"user_checkUserName.json",
             method:"post",
@@ -64,6 +64,7 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
         })
     }
     $scope.sendCode=function () {
+
         $http({
             url:"user_sendEmail.json",
             method:"post",
@@ -77,22 +78,29 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
     }
     //驗證激活碼
     $scope.check=function () {
-        $http({
-            url:"user_checkCode.json",
-            method:"post",
-            data: $httpParamSerializer({checkcode:$scope.checkcode}),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            }
-        }).then(function (data) {
-            if(data.data.code==300){
-                $('.checkcode_err').popover('show')
-            }
-            else{
-                $('.checkcode_err').popover('hide')
-            }
-            console.log($scope.name_err)
-        })
+        $scope.isdisabled=true;
+        if($scope.checkcode!=null) {
+            $http({
+                url: "user_checkCode.json",
+                method: "post",
+                data: $httpParamSerializer({checkcode: $scope.checkcode}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                }
+            }).then(function (data) {
+                if (data.data.code == 300) {
+                    $('.checkcode_err').popover('show')
+                    $scope.name_err = true;
+                }
+                else {
+                    $('.checkcode_err').popover('hide')
+                    $scope.name_err = false;
+                    if($scope.name_err==false&&$scope.username!=null&&$scope.password!=null&&$scope.ensurepwd!=null&&$scope.phone!=null&&$scope.email!=null&&$scope.checkcode!=null){
+                        $scope.isdisabled=false;
+                    }
+                }
+            })
+        }
     }
     $scope.ensurePws=function () {
 
@@ -104,6 +112,7 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
 		}
     }
     $scope.checkphone=function () {
+
 		if(!(/^1[34578]\d{9}$/.test($scope.phone))){
             $(".phone_err").popover('show')
         }else{
@@ -111,6 +120,7 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
 		}
     }
     $scope.checkemail=function () {
+
         if(!(/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test($scope.email))){
             $(".email_err").popover('show')
         }else{
@@ -169,6 +179,9 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
         }).then(function (data) {
 
         })
+    }
+    $scope.userlogout=function () {
+        $state.go('index');
     }
 
 })

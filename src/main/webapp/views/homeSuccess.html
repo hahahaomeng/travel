@@ -1,7 +1,8 @@
 <meta charset="UTF-8">
 <div ng-controller="logSucCtrl">
-    <ul class="nav-box">
+    <ul class="nav-box-first">
         <li class="logo" ng-click="goindex()"><img src="/travel/images/logo.jpg"></li>
+        <li ng-click="userlogout()">注销</li>
         <li ng-click="goPersonInfo()" data-toggle="modal" data-target="#personinfo">{{username}}</li>
         <li ng-click="checkComment()">我的评论</li>
         <li ng-click="getRebackApp()">我的申请</li>

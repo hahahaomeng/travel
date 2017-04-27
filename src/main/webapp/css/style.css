@@ -86,16 +86,16 @@ body{
     text-align: center;
 }
 .nav-box{
-    height:50px;
+    height:90px;
     width: 100%;
     background-color: #ed5565;
 }
 .nav-box>li{
     display: inline-block;
     width: 85px;
-    height:50px;
+    height:90px;
     text-align: center;
-    line-height:50px;
+    line-height:90px;
     color: #fff;
     float: right;
     cursor: default;
@@ -165,4 +165,28 @@ body{
     width:100px;
     margin-left:30px;
     display: inline-block;
+}
+.welcomimg{
+    position: absolute;
+    top: 120px;
+    left: 355px;
+}
+.nav-stacked{
+    BACKGROUND-COLOR: STEELBLUE;
+}
+.nav-stacked > li {
+    text-align: center;
+    height: 63px;
+}
+.nav-stacked >li> a{
+    border-radius:0!important;
+}
+.nav-stacked >li> a:hover{
+    background-color: #2b669a!important;
+}
+.nav > li > a {
+    height: 63px;
+    line-height: 63px;
+    padding: 0;
+    color: #fff;
 }

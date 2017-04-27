@@ -80,6 +80,13 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("adminSuccess", {
             url: '/homeSuccess?username',
             templateUrl: 'adminviews/adminSuccess.html',
+            abstract:true,
             controller: 'adminlogSucCtrl'
+        }).state("adminSuccess.welcome", {
+            url: '/adminSuccess/welcome',
+            templateUrl: 'adminviews/welcome.html'
+        }).state("adminSuccess.addproduct", {
+            url: '/adminSuccess/addproduct',
+            templateUrl: 'adminviews/addproduct.html'
         })
     });
