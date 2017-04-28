@@ -187,23 +187,27 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
 })
 //获取产品列表控制器
 myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
-    $scope.productdetail=function(productid) {
-        $state.go('homeSuccess.productdetail',{productid:productid});
+    $scope.productdetail = function (productid) {
+        $state.go('homeSuccess.productdetail', {productid: productid});
     }
     $http({
-            url: "product_findAllPro.json",
-            method: "post",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            }
-        }).then(function (data) {
-            if(data.data.code==200) {
-                $scope.product=data.data.data;
-            }else{
-                $scope.product=null;
-            }
-        })
-
+        url: "product_findAllPro.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.product = data.data.data;
+            $scope.slides = $scope.product;
+        } else {
+            $scope.product = null;
+        }
+    })
+    $scope.myInterval = 5000;
+    $scope.noWrapSlides = false;
+    $scope.active = 0;
+    $scope.currIndex = 0;
 })
 //产品详情页面控制器
 myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
@@ -571,6 +575,7 @@ myContrl.controller("adminlogSucCtrl",function ($scope,$state,$stateParams,$http
         $state.go('index');
     }
 })
+//管理员添加商品控制器
 myContrl.controller("addproductCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
     $scope.canceladd=function () {
         $state.go('adminSuccess.welcome');
@@ -605,4 +610,20 @@ myContrl.controller("addproductCtrl",function ($scope,$state,$stateParams,$httpP
             }
         })
     }
+})
+//管理员查看订单控制器
+myContrl.controller("findorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $http({
+        url: "comment_checkComment.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.comment=data.data.data;
+        }else{
+            $scope.comment=null;
+        }
+    })
 })

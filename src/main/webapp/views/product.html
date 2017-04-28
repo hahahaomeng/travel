@@ -12,35 +12,46 @@
         <li><a href="#">Java</a></li>
 
     </ul>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner"  role="listbox">
-            <div class="item" ng-class="{true:'active',false:''}[$index==0]"  ng-repeat="item in product">
-                <img src={{item.imageurl}}  ng-click="productdetail(item.productid)">
-                <div class="carousel-caption">
-                    {{item.productname}}
+        <div style="height: 305px">
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides track by $index" index="$index">
+                    <img class="lunbo" ng-src="{{slide.imageurl}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <h4>Slide {{slide.productid}}</h4>
+                        <p>{{slide.productname}}</p>
+                    </div>
                 </div>
             </div>
         </div>
+    <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">-->
+        <!--&lt;!&ndash; Indicators &ndash;&gt;-->
+        <!--<ol class="carousel-indicators">-->
+            <!--<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>-->
+            <!--<li data-target="#carousel-example-generic" data-slide-to="1"></li>-->
+            <!--<li data-target="#carousel-example-generic" data-slide-to="2"></li>-->
+        <!--</ol>-->
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-    </div>
+        <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
+        <!--<div class="carousel-inner"  role="listbox">-->
+            <!--<div class="item" ng-class="{true:'active',false:''}[$index==0]"  ng-repeat="item in product">-->
+                <!--<img src={{item.imageurl}}  ng-click="productdetail(item.productid)">-->
+                <!--<div class="carousel-caption">-->
+                    <!--{{item.productname}}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; Controls &ndash;&gt;-->
+        <!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">-->
+            <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+            <!--<span class="sr-only">Previous</span>-->
+        <!--</a>-->
+        <!--<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">-->
+            <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+            <!--<span class="sr-only">Next</span>-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
     <div class="homeShow">
     <span class="product-content" ng-repeat="item in product" ng-click="productdetail(item.productid)">
         <img class="img-thumbnail" src={{item.imageurl}}>

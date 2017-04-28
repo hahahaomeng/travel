@@ -7,7 +7,7 @@ app.run(function($rootScope, $state, $stateParams) {
     $rootScope.$stateParams = $stateParams;
 });
    app.config(function ($stateProvider,$urlRouterProvider) {
-        //$urlRouterProvider.otherwise('/index');
+        $urlRouterProvider.otherwise('/index');
         $stateProvider.state("index", {
             url:"/index",
             views:{
@@ -88,5 +88,11 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("adminSuccess.addproduct", {
             url: '/adminSuccess/addproduct',
             templateUrl: 'adminviews/addproduct.html'
+        }).state("adminSuccess.fixproduct", {
+            url: '/adminSuccess/fixproduct',
+            templateUrl: 'adminviews/fixproduct.html'
+        }).state("adminSuccess.findorder", {
+            url: '/adminSuccess/findorder',
+            templateUrl: 'adminviews/findorder.html'
         })
     });
