@@ -1,3 +1,24 @@
-<div ng-controller="findorderCtrl">
-    订单页面
+<div ng-controller="findorderCtrl" class="welcome2">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>用户名</th>
+            <th>景点名</th>
+            <th>景点地点</th>
+            <th>出发时间</th>
+            <th>人数</th>
+            <th>出发地点</th>
+            <th>价格</th>
+            <th>状态</th>
+        </tr>
+        <tr ng-repeat="item in adminorder">
+            <td>{{item.username}}</td>
+            <td>{{item.productname}}</td>
+            <td>{{item.proplace}}</td>
+            <td>{{item.godata}}</td>
+            <td>{{item.gonumber}}</td>
+            <td>{{item.goplace}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.state}}</td>
+        </tr>
+    </table>
 </div>

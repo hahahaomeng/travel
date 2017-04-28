@@ -1,3 +1,19 @@
-<div>
-    修改景点页面
+<div ng-controller="fixproductCtrl" class="fixproduct">
+    <div>
+        <div class="col-sm-6 col-md-3" style="width: 283px;" ng-repeat="item in product">
+            <div class="thumbnail">
+                <img src={{item.imageurl}}
+                     alt="通用的占位符缩略图">
+                <div class="caption">
+                    <h4>{{item.productname}}</h4>
+                    <h3>￥{{item.price}}</h3>
+                    <span>{{item.prodescribe}}</span>
+                    <p>
+                        <button class="btn btn-primary btn-small" ng-click="">修改</button>
+                        <button class="btn btn-primary btn-small" ng-click="deleteProdcut(item.productid)">删除</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

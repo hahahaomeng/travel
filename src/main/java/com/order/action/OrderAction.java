@@ -17,6 +17,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.order.bean.AdminOrderDate;
 import com.order.bean.OrderDate;
 import com.order.entity.Application;
 import com.order.entity.Order;
@@ -255,6 +256,44 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		applicationService.addApplication(application);
 		orderService.reback(order);
 		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	//管理员查看所有订单
+	public String adminfindOrder() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Order> list=orderService.findAllOrder();
+		List<AdminOrderDate> list2=new ArrayList();
+		for(Order order:list){
+			AdminOrderDate a=new AdminOrderDate();
+			a.setUsername(order.getUser().getUsername());
+			a.setOrderid(order.getOrderid());
+			a.setProductname(order.getProduct().getProductname());
+			a.setProducturl(order.getProduct().getImageurl());
+			a.setGodata(order.getGodate().toString());
+			a.setGonumber(order.getGonumber());
+			a.setGoplace(order.getProduct().getGoplace());
+			a.setPrice(order.getPrice());
+			a.setProplace(order.getProduct().getProplace());
+			if(order.getState().equals("0")){
+				a.setState("未付款");
+			}else if(order.getState().equals("1")){
+				a.setState("已付款");
+			}else if(order.getState().equals("2")){
+				a.setState("已完成");
+			}else if(order.getState().equals("4")){
+				a.setState("已评论");
+			}else if(order.getState().equals("3")){
+				a.setState("退订中");
+			}
+			list2.add(a);
+		}
+		
+		json.accumulate("code", 200);
+		json.accumulate("data",list2);
 		response.getWriter().print(json.toString());
 		return NONE;
 	}

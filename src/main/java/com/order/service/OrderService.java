@@ -75,4 +75,8 @@ public class OrderService {
 		order.setState("4");
 		orderDAO.attachDirty(order);
 	}
+	public List<Order> findAllOrder() {
+		// TODO Auto-generated method stub
+		return orderDAO.findAll();
+	}
 }	

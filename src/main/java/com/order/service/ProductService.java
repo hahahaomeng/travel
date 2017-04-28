@@ -32,7 +32,8 @@ public class ProductService {
 
 	public List<Product> findAllPro() {
 		// TODO Auto-generated method stub
-		return productDAO.findAll();
+		return productDAO.findByProstate("0");
+//		return productDAO.findAll();
 	}
 
 	public void modProduct(Product product) {

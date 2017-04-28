@@ -614,16 +614,64 @@ myContrl.controller("addproductCtrl",function ($scope,$state,$stateParams,$httpP
 //管理员查看订单控制器
 myContrl.controller("findorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
     $http({
-        url: "comment_checkComment.json",
+        url: "order_adminfindOrder.json",
         method: "post",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
     }).then(function (data) {
         if(data.data.code==200) {
-            $scope.comment=data.data.data;
+            $scope.adminorder=data.data.data;
         }else{
-            $scope.comment=null;
+            $scope.adminorder=null;
+        }
+    })
+})
+//管理员修改景点控制器
+myContrl.controller("fixproductCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $http({
+        url: "product_findAllPro.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.product = data.data.data;
+        } else {
+            $scope.product = null;
+        }
+    })
+    $scope.deleteProdcut=function(productid){
+        $http({
+            url: "product_delProduct.json",
+            method: "post",
+            data: $httpParamSerializer({productid:productid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if (data.data.code == 200) {
+                $state.reload();
+            } else {
+
+            }
+        })
+    }
+})
+//管理员查看申请控制器
+myContrl.controller("findApplyCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    $http({
+        url: "product_findAllPro.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.product = data.data.data;
+        } else {
+            $scope.product = null;
         }
     })
 })

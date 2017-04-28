@@ -94,5 +94,8 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("adminSuccess.findorder", {
             url: '/adminSuccess/findorder',
             templateUrl: 'adminviews/findorder.html'
+        }).state("adminSuccess.findApply", {
+            url: '/adminSuccess/findApply',
+            templateUrl: 'adminviews/findApply.html'
         })
     });

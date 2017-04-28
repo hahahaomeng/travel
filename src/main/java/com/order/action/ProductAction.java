@@ -61,7 +61,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 		Product product = productService.findProductById(Integer.parseInt(request
-				.getParameter("productId")));
+				.getParameter("productid")));
 		JSONObject json = new JSONObject();
 		productService.delProduct(product);
 		json.accumulate("code", 200);
