@@ -18,39 +18,44 @@
                 </div>
             </div>
             <hr>
-            <div class="content-container">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#detail" aria-controls="detail" role="tab" data-toggle="tab">景点详情</a></li>
-                    <li role="presentation"><a href="#must-know" aria-controls="must-know" role="tab" data-toggle="tab">用户须知</a></li>
-                    <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">驴友点评</a></li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="detail">
-                        <div class="panel panel-default" style="border-top:0px;">
-                            <div class="panel-body">
-                                <h5>{{product.prodetail}}</h5>
-                            </div>
-                        </div>
+            <uib-tabset active="activeJustified" justified="true">
+                <uib-tab index="0" heading="Justified">Justified content</uib-tab>
+                <uib-tab index="1" heading="SJ">Short Labeled Justified content</uib-tab>
+                <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
+            </uib-tabset>
+            <!--<div class="content-container">-->
+                <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
+                <!--<ul class="nav nav-tabs" role="tablist">-->
+                    <!--<li role="presentation" class="active"><a ng-click="javascript:document.getElementById('detail')" aria-controls="detail" role="tab" data-toggle="tab">景点详情</a></li>-->
+                    <!--<li role="presentation"><a ng-click="javascript:document.getElementById('must-konw')" aria-controls="must-know" role="tab" data-toggle="tab">用户须知</a></li>-->
+                    <!--<li role="presentation"><a ng-click="javascript:document.getElementById('comment')" aria-controls="comment" role="tab" data-toggle="tab">驴友点评</a></li>-->
+                <!--</ul>-->
+                <!--&lt;!&ndash; Tab panes &ndash;&gt;-->
+                <!--<div class="tab-content">-->
+                    <!--<div role="tabpanel" class="tab-pane active" id="detail">-->
+                        <!--<div class="panel panel-default" style="border-top:0px;">-->
+                            <!--<div class="panel-body">-->
+                                <!--<h5>{{product.prodetail}}</h5>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="must-know">
-                        <div class="panel panel-default" style="border-top:0px;">
-                            <div class="panel-body">
-                                <h5>{{product.prodetail}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="comment">
-                        <div class="panel panel-default" style="border-top:0px;">
-                            <div class="panel-body">
-                                <h5>{{product.prodetail}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <!--</div>-->
+                    <!--<div role="tabpanel" class="tab-pane" id="must-know">-->
+                        <!--<div class="panel panel-default" style="border-top:0px;">-->
+                            <!--<div class="panel-body">-->
+                                <!--<h5>hello</h5>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div role="tabpanel" class="tab-pane" id="comment">-->
+                        <!--<div class="panel panel-default" style="border-top:0px;">-->
+                            <!--<div class="panel-body">-->
+                                <!--<h5>用户评论</h5>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </div>

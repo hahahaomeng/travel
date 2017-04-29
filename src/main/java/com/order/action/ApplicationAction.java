@@ -112,7 +112,7 @@ public class ApplicationAction extends ActionSupport implements ModelDriven<Appl
 		List<Application> list=applicationService.findAll();
 		List<ApplicationDate> list2=new ArrayList();
 		for(Application app:list){
-			if(app.getAppstate().equals("1"));{
+			if(app.getAppstate().equals("1")){
 				ApplicationDate a=new ApplicationDate();
 				a.setUsername(app.getOrder().getUser().getUsername());
 				a.setProductname(app.getOrder().getProduct().getProductname());
@@ -144,7 +144,7 @@ public class ApplicationAction extends ActionSupport implements ModelDriven<Appl
 		List<Application> list=applicationService.findAll();
 		List<ApplicationDate> list2=new ArrayList();
 		for(Application app:list){
-			if(app.getAppstate().equals("2"));{
+			if(app.getAppstate().equals("2")){
 				ApplicationDate a=new ApplicationDate();
 				a.setUsername(app.getOrder().getUser().getUsername());
 				a.setProductname(app.getOrder().getProduct().getProductname());
