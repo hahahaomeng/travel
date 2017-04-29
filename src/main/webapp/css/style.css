@@ -154,7 +154,7 @@ body{
     width:980px;
     margin:0 auto;
 }
-.nav{
+.product-box .nav{
     width: 160px;
     margin-right: 10px;
     display: inline-block;
@@ -171,20 +171,20 @@ body{
     top: 120px;
     left: 355px;
 }
-.nav-stacked{
+.product-box .nav-stacked{
     BACKGROUND-COLOR: STEELBLUE;
 }
-.nav-stacked > li {
+.product-box .nav-stacked > li {
     text-align: center;
     height: 63px;
 }
-.nav-stacked >li> a{
+.product-box .nav-stacked >li> a{
     border-radius:0!important;
 }
-.nav-stacked >li> a:hover{
+.product-box .nav-stacked >li> a:hover{
     background-color: #2b669a!important;
 }
-.nav > li > a {
+.product-box .nav > li > a {
     height: 63px;
     line-height: 63px;
     padding: 0;

@@ -48,34 +48,34 @@ app.run(function($rootScope, $state, $stateParams) {
            templateUrl: 'views/productdetail.html',
            controller: 'getProCtrl'
        }).state("homeSuccess.product", {
-           url: "/homeSuccess/product",
+           url: "/product",
            templateUrl: 'views/product.html'
        }).state("homeSuccess.productdetail", {
-           url: "/homeSuccess/productdetail",
+           url: "/productdetail",
            templateUrl: 'views/productdetail.html'
        }).state("homeSuccess.order", {
-           url: "/homeSuccess/order",
+           url: "/order",
            templateUrl: 'views/order.html'
        }).state("homeSuccess.payorder", {
-           url: "/homeSuccess/payorder",
+           url: "/payorder",
            templateUrl: 'views/payorder.html'
        }).state("homeSuccess.nopayorder", {
-           url: "/homeSuccess/nopayorder",
+           url: "/nopayorder",
            templateUrl: 'views/nopayorder.html'
        }).state("homeSuccess.payedorder", {
-           url: "/homeSuccess/payedorder",
+           url: "/payedorder",
            templateUrl: 'views/payedorder.html'
        }).state("homeSuccess.personinfo", {
-           url: "/homeSuccess/personinfo",
+           url: "/personinfo",
            templateUrl: 'views/personinfo.html'
        }).state("homeSuccess.finishorder", {
-           url: "/homeSuccess/finishorder",
+           url: "/finishorder",
            templateUrl: 'views/finishorder.html'
        }).state("homeSuccess.appreback", {
-           url: "/homeSuccess/appreback",
+           url: "/appreback",
            templateUrl: 'views/appreback.html'
        }).state("homeSuccess.comment", {
-           url: "/homeSuccess/comment",
+           url: "/comment",
            templateUrl: 'views/comment.html'
        }).state("adminSuccess", {
            url: '/homeSuccess?username',

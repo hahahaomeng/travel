@@ -134,19 +134,23 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
 //登陆成功控制器
 myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$state,$stateParams,$location) {
    $scope.username=$stateParams.username;
-    $http({
-        url: "user_getPersonInfo.json",
-        method: "post",
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        }
-    }).then(function (data) {
-        if (data.data.code == 200) {
-            $scope.user = data.data.data;
-        } else {
-            $scope.user = null;
-        }
-    })
+   if($scope.username) {
+       $http({
+           url: "user_getPersonInfo.json",
+           method: "post",
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+           }
+       }).then(function (data) {
+           if (data.data.code == 200) {
+               $scope.user = data.data.data;
+           } else {
+               $scope.user = null;
+           }
+       })
+   }else{
+
+   }
    $scope.getAllOrder=function () {
        $state.go('homeSuccess.order');
    }
@@ -210,24 +214,34 @@ myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
     $scope.currIndex = 0;
 })
 //产品详情页面控制器
-myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$window) {
     $scope.productid=$stateParams.productid;
+    $scope.username=$stateParams.username;
     $scope.applyorder=function () {
-        $http({
-            url: "order_applyOrder.json",
-            method: "post",
-            data: $httpParamSerializer({productid:$scope.productid,price:$scope.product.price,gonumber:$scope.gonumber,godate:$scope.godate}),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            }
-        }).then(function (data) {
-            if(data.data.code==200) {
-                $scope.order=data.data.data;
-                $state.go('homeSuccess.payorder',{orderid:$scope.order.orderid});
-            }else{
-                $scope.order=null;
-            }
-        })
+        if($scope.username) {
+            $http({
+                url: "order_applyOrder.json",
+                method: "post",
+                data: $httpParamSerializer({
+                    productid: $scope.productid,
+                    price: $scope.product.price,
+                    gonumber: $scope.gonumber,
+                    godate: $scope.godate
+                }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                }
+            }).then(function (data) {
+                if (data.data.code == 200) {
+                    $scope.order = data.data.data;
+                    $state.go('homeSuccess.payorder', {orderid: $scope.order.orderid});
+                } else {
+                    $scope.order = null;
+                }
+            })
+        }else{
+            $window.alert("请登录后开始预定!");
+        }
     }
     $http({
         url: "product_findProById.json",
@@ -243,6 +257,10 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
             $scope.product=null;
         }
     })
+
+    $scope.selectTab = function(index) {
+        console.log(index);
+    }
 })
 //查询所有订单页面控制器
 myContrl.controller("orderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
