@@ -258,8 +258,21 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
         }
     })
 
-    $scope.selectTab = function(index) {
-        console.log(index);
+    $scope.getComment = function() {
+        $http({
+            url: "comment_getProductComment.json",
+            method: "post",
+            data: $httpParamSerializer({productid:$scope.productid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $scope.comment=data.data.data;
+            }else{
+                $scope.comment=null;
+            }
+        })
     }
 })
 //查询所有订单页面控制器

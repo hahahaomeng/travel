@@ -6,6 +6,14 @@ public class CommentDate {
 	String commenturl;
 	String commentdate;
 	String commentstate;
+	String username;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getProductname() {
 		return productname;
 	}

@@ -31,4 +31,8 @@ public class CommentService {
 		}
 		return list2;
 	}
+	public List<Comment> findAllComment() {
+		// TODO Auto-generated method stub
+		return commentDAO.findAll();
+	}
 }

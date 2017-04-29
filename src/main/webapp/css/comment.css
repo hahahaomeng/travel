@@ -1,0 +1,49 @@
+.comment-container{
+    width:80%;
+    height:150px;
+    margin:0 auto;
+    margin-top:40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    box-sizing: content-box;
+}
+.comment-container .comment-left{
+    width:20%;
+    height:150px;
+    float: left;
+}
+.comment-container .comment-right{
+    width:80%;
+   height:150px;
+    float:left;
+}
+.comment-container .comment-left p{
+    font-size: 20px;
+    text-align: left;
+    line-height: 100px;
+}
+.comment-container .comment-left  .icon{
+    margin-right:10px;
+}
+.comment-container .comment-right{
+    font-size: 20px;
+    color:#ED5565;
+}
+.comment-container .comment-right h5{
+    color: #0f0f0f;
+}
+.comment-container .comment-right .img-container{
+    width:50px;
+    height:50px;
+    padding:5px;
+    border: 1px solid #f0f0f0;
+}
+.comment-container .comment-right .img-container img{
+    width:40px;
+    height:40px;
+}
+.comment-container .comment-right .commentdate{
+    color: darkgray;
+    font-size: 15px;
+}

@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+
 <div ng-controller="prodetailCtrl" class="product-detail">
     <div class="panel panel-default out-container">
         <div class="panel-body">
@@ -20,45 +21,28 @@
             <hr>
             <div>
                 <uib-tabset active="activeJustified">
-                    <uib-tab index="0" heading="景点详情" select="selectTab(0)"><h5>{{product.prodetail}}</h5></uib-tab>
+                    <uib-tab index="0" heading="景点详情"><div class="panel panel-warning" style="font-size: 15px;font-family: Consolas;margin-top: 20px;">{{product.prodetail}}</div></uib-tab>
                     <uib-tab index="1" heading="用户须知">Short Labeled Justified content</uib-tab>
-                    <uib-tab index="2" heading="驴友点评">Long Labeled Justified content</uib-tab>
+                    <uib-tab index="2" heading="驴友点评" select="getComment()">
+                        <div class="comment-container well" ng-repeat="item in comment">
+                            <div class="comment-left">
+                                <p>
+                                    <span class="glyphicon glyphicon-user icon" aria-hidden="true"></span>
+                                    <span>{{item.username.split("")[0]+"***"+item.username.split("")[item.username.split("").length-1]}}</span>
+                                </p>
+                            </div>
+                            <div class="comment-right">
+                                <span uib-rating ng-model="item.commentstate" max="5" read-only="true" aria-labelledby="default-rating"></span>
+                                <h5>{{item.content}}</h5>
+                                <div class="img-container">
+                                    <img ng-src={{item.commenturl}} alt="">
+                                </div>
+                                <span class="commentdate">{{item.commentdate}}</span>
+                            </div>
+                        </div>
+                    </uib-tab>
                 </uib-tabset>
             </div>
-
-            <!--<div class="content-container">-->
-                <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
-                <!--<ul class="nav nav-tabs" role="tablist">-->
-                    <!--<li role="presentation" class="active"><a ng-click="javascript:document.getElementById('detail')" aria-controls="detail" role="tab" data-toggle="tab">景点详情</a></li>-->
-                    <!--<li role="presentation"><a ng-click="javascript:document.getElementById('must-konw')" aria-controls="must-know" role="tab" data-toggle="tab">用户须知</a></li>-->
-                    <!--<li role="presentation"><a ng-click="javascript:document.getElementById('comment')" aria-controls="comment" role="tab" data-toggle="tab">驴友点评</a></li>-->
-                <!--</ul>-->
-                <!--&lt;!&ndash; Tab panes &ndash;&gt;-->
-                <!--<div class="tab-content">-->
-                    <!--<div role="tabpanel" class="tab-pane active" id="detail">-->
-                        <!--<div class="panel panel-default" style="border-top:0px;">-->
-                            <!--<div class="panel-body">-->
-                                <!--<h5>{{product.prodetail}}</h5>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div role="tabpanel" class="tab-pane" id="must-know">-->
-                        <!--<div class="panel panel-default" style="border-top:0px;">-->
-                            <!--<div class="panel-body">-->
-                                <!--<h5>hello</h5>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div role="tabpanel" class="tab-pane" id="comment">-->
-                        <!--<div class="panel panel-default" style="border-top:0px;">-->
-                            <!--<div class="panel-body">-->
-                                <!--<h5>用户评论</h5>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
     </div>
 </div>

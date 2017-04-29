@@ -87,4 +87,36 @@ public class CommentAction extends ActionSupport implements ModelDriven<Comment>
 		response.getWriter().print(json.toString());
 		return NONE;
 	}
+	/**
+	 * 根据景点获取评论
+	 */
+	public String getProductComment() throws IOException{
+		HttpServletResponse response=ServletActionContext.getResponse();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json=new JSONObject();
+		String productid=request.getParameter("productid");
+		
+		List<Comment> list=commentService.findAllComment();
+		List<CommentDate> list2=new ArrayList();
+		for(Comment comment:list){
+			
+			if(comment.getOrder().getProduct().getProductid()==Integer.parseInt(productid)){
+			
+				CommentDate b=new CommentDate();
+				b.setProductname(comment.getOrder().getProduct().getProductname());
+				b.setCommentstate(comment.getCommentstate());
+				b.setCommenturl(comment.getCommenturl());
+				b.setContent(comment.getContent());
+				b.setCommentdate(comment.getCommentdate().toString());
+				b.setUsername(comment.getOrder().getUser().getUsername());
+				
+				list2.add(b);
+			}
+		}
+		json.accumulate("code", 200);
+		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 }

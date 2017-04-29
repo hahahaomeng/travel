@@ -192,7 +192,7 @@ body{
 }
 .welcome2{
     margin-top:21px;
-    background-color: #5fcdda;
+    /*background-color: #5fcdda;*/
     width:850px;
     position:absolute;
     margin-left: 350px;
