@@ -2,6 +2,7 @@ package com.order.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,7 +92,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 		JSONObject json = new JSONObject();
 		String pass=MD5.encoderByMd5(this.user.getPassword());
 		User user1=userService.findByUserName(this.user.getUsername());
-		if (user1!=null&&pass.equals(user1.getPassword())&&user1.getType().equals("0")) {
+		if (user1!=null&&pass.equals(user1.getPassword())&&user1.getType().equals("0")&&user1.getState().equals("0")) {
 			json.accumulate("code", 200);
 			json.accumulate("data", user1);
 			ServletActionContext.getRequest().getSession().setAttribute("user", user1);
@@ -99,6 +100,9 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			json.accumulate("code", 300);
 			json.accumulate("data", user1);
 			ServletActionContext.getRequest().getSession().setAttribute("user", user1);
+		}else if(user1!=null&&pass.equals(user1.getPassword())&&user1.getType().equals("0")&&user1.getState().equals("1")){
+			json.accumulate("code", 500);
+			json.accumulate("errMsg", "你已经被冻结");
 		}else{
 			json.accumulate("code", 500);
 			json.accumulate("errMsg", "用户名或密码错误");
@@ -279,6 +283,72 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 			json.accumulate("code", 200);
 			response.getWriter().print(json.toString());
 		}
+		return NONE;
+	}
+	/**
+	 * 管理员查看所有未冻结普通用户用户信息
+	 */
+	public String findnormalUser() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<User> list=userService.findAllUser();
+		List<User> list2=new ArrayList();
+		for(User user:list){
+			if(user.getState().equals("0")&&user.getType().equals("0")){
+				list2.add(user);
+			}
+		}
+		json.accumulate("code", 200);
+		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 管理员获取所有被冻结的用户信息
+	 */
+	public String findUnnormalUser() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<User> list=userService.findAllUser();
+		List<User> list2=new ArrayList();
+		for(User user:list){
+			if(user.getState().equals("1")&&user.getType().equals("0")){
+				list2.add(user);
+			}
+		}
+		json.accumulate("code", 200);
+		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 管理员冻结用户
+	 */
+	public String freezerUser() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user=userService.findByUserId(Integer.parseInt(request.getParameter("userid")));
+		userService.freezer(user);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 管理员解冻用户
+	 */
+	public String nofreezerUser() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		User user=userService.findByUserId(Integer.parseInt(request.getParameter("userid")));
+		userService.nofreezer(user);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
 		return NONE;
 	}
 }

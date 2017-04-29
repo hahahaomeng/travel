@@ -658,6 +658,9 @@ myContrl.controller("fixproductCtrl",function ($scope,$state,$stateParams,$httpP
             }
         })
     }
+    $scope.gofixpage=function(product) {
+        $state.go('adminSuccess.fixprodetail',{productid:product})
+    }
 })
 //管理员查看申请控制器
 myContrl.controller("findApplyCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
@@ -732,4 +735,69 @@ myContrl.controller("findnopassCtrl",function ($scope,$state,$stateParams,$httpP
             $scope.application = null;
         }
     })
+})
+//管理员查看普通正常用户控制器
+myContrl.controller("findnormalUserCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "user_findnormalUser.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.user = data.data.data;
+        } else {
+            $scope.user = null;
+        }
+    })
+    $scope.freezer=function (userid) {
+        $http({
+            url: "user_freezerUser.json",
+            method: "post",
+            data: $httpParamSerializer({userid:userid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload();
+            }
+        })
+    }
+})
+
+//管理员查看被冻结用户控制器
+myContrl.controller("findUnnormalUserCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "user_findUnnormalUser.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.user = data.data.data;
+        } else {
+            $scope.user = null;
+        }
+    })
+    $scope.nofreezer=function (userid) {
+        $http({
+            url: "user_nofreezerUser.json",
+            method: "post",
+            data: $httpParamSerializer({userid:userid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.reload();
+            }
+        })
+    }
+})
+//管理员修改景点页面控制器
+myContrl.controller("fixprodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $scope.productid=$stateParams.productid;
 })

@@ -1,0 +1,18 @@
+<div ng-controller="findUnnormalUserCtrl" class="welcome2">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>用户名</th>
+            <th>电话</th>
+            <th>邮箱</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="item in user">
+            <td>{{item.username}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.email}}</td>
+            <td>
+                <button class="btn btn-primary btn-small" ng-click="nofreezer(item.userid)">解除冻结</button>
+            </td>
+        </tr>
+    </table>
+</div>

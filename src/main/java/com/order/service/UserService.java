@@ -68,4 +68,14 @@ public class UserService {
 		// TODO Auto-generated method stub
 		userDAO.attachDirty(user2);
 	}
+	public void freezer(User user) {
+		// TODO Auto-generated method stub
+		user.setState("1");
+		userDAO.attachDirty(user);
+	}
+	public void nofreezer(User user) {
+		// TODO Auto-generated method stub
+		user.setState("0");
+		userDAO.attachDirty(user);
+	}
 }
