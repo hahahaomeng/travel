@@ -800,4 +800,19 @@ myContrl.controller("findUnnormalUserCtrl",function ($scope,$state,$stateParams,
 //管理员修改景点页面控制器
 myContrl.controller("fixprodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
     $scope.productid=$stateParams.productid;
+    $http({
+        url: "product_findProById.json",
+        method: "post",
+        data: $httpParamSerializer({productid:$scope.productid}),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            $scope.product=data.data.data;
+        }else{
+            $scope.product=null;
+        }
+    })
+
 })

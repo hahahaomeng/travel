@@ -33,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="travel.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="travel.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/travel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="801" column="20" lean-forward="false" selection-start-line="801" selection-start-column="20" selection-end-line="801" selection-end-column="20" />
+            <state relative-caret-position="256">
+              <caret line="808" column="9" lean-forward="true" selection-start-line="808" selection-start-column="9" selection-end-line="808" selection-end-column="9" />
               <folding>
                 <element signature="e#1160#4320#0" expanded="false" />
                 <element signature="e#6817#7955#0" expanded="false" />
@@ -83,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fixprodetail.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="fixprodetail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/adminviews/fixprodetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="0">
+              <caret line="0" column="28" lean-forward="true" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -205,8 +205,8 @@
         <option value="$PROJECT_DIR$/adminviews/findUnnormalUser.html" />
         <option value="$PROJECT_DIR$/adminviews/fixproduct.html" />
         <option value="$PROJECT_DIR$/App.js" />
-        <option value="$PROJECT_DIR$/controllers/travel.js" />
         <option value="$PROJECT_DIR$/adminviews/fixprodetail.html" />
+        <option value="$PROJECT_DIR$/controllers/travel.js" />
       </list>
     </option>
   </component>
@@ -436,12 +436,12 @@
       <workItem from="1493291136210" duration="11051000" />
       <workItem from="1493340514995" duration="16715000" />
       <workItem from="1493428058153" duration="605000" />
-      <workItem from="1493431129454" duration="8834000" />
+      <workItem from="1493431129454" duration="9338000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="238905000" />
+    <option name="totallyTimeSpent" value="239409000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
@@ -804,10 +804,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/adminviews/fixprodetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="28" lean-forward="true" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/travel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="801" column="20" lean-forward="false" selection-start-line="801" selection-start-column="20" selection-end-line="801" selection-end-column="20" />
+        <state relative-caret-position="256">
+          <caret line="808" column="9" lean-forward="true" selection-start-line="808" selection-start-column="9" selection-end-line="808" selection-end-column="9" />
           <folding>
             <element signature="e#1160#4320#0" expanded="false" />
             <element signature="e#6817#7955#0" expanded="false" />
@@ -827,14 +835,6 @@
             <element signature="e#23321#23707#0" expanded="false" />
             <element signature="e#23832#24631#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminviews/fixprodetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
