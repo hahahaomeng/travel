@@ -662,16 +662,74 @@ myContrl.controller("fixproductCtrl",function ($scope,$state,$stateParams,$httpP
 //管理员查看申请控制器
 myContrl.controller("findApplyCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
     $http({
-        url: "product_findAllPro.json",
+        url: "application_adminGetApp.json",
         method: "post",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
         }
     }).then(function (data) {
         if (data.data.code == 200) {
-            $scope.product = data.data.data;
+            $scope.application = data.data.data;
         } else {
-            $scope.product = null;
+            $scope.application = null;
+        }
+    })
+    $scope.pass=function(appid){
+        $http({
+            url:"application_passApp.json",
+            method:"post",
+            data: $httpParamSerializer({appid:appid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            console.log(data.data.code);
+            $state.reload();
+        })
+    }
+    $scope.reject=function(appid){
+        $http({
+            url:"application_rejectApp.json",
+            method:"post",
+            data: $httpParamSerializer({appid:appid}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            console.log(data.data.code);
+            $state.reload();
+        })
+    }
+})
+//管理员查看通过申请
+myContrl.controller("findpassApplyCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "application_adminGetPassapp.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.application = data.data.data;
+        } else {
+            $scope.application = null;
+        }
+    })
+})
+//管理员查看未通过申请
+myContrl.controller("findnopassCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "application_adminGetNopassapp.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if (data.data.code == 200) {
+            $scope.application = data.data.data;
+        } else {
+            $scope.application = null;
         }
     })
 })

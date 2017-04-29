@@ -29,4 +29,22 @@ public class ApplicationService {
 		}
 		return list2;
 	}
+	public List<Application> findAll() {
+		// TODO Auto-generated method stub
+		return applicationDAO.findAll();
+	}
+	public Application findByAppid(int parseInt) {
+		// TODO Auto-generated method stub
+		return applicationDAO.findById(parseInt);
+	}
+	public void passApp(Application app) {
+		// TODO Auto-generated method stub
+		app.setAppstate("1");
+		applicationDAO.attachDirty(app);
+	}
+	public void rejectApp(Application app) {
+		// TODO Auto-generated method stub
+		app.setAppstate("2");
+		applicationDAO.attachDirty(app);
+	}
 }

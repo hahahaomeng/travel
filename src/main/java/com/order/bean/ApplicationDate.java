@@ -4,12 +4,20 @@ public class ApplicationDate {
 	int appid;
 	int approderid;
 	int gonumber;
+	String username;
 	String productname;
 	Double price;
 	String appstate;
 	String apptype;
 	String appdate;
 	String appnotice;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getAppid() {
 		return appid;
 	}

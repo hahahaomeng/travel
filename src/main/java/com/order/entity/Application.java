@@ -125,13 +125,4 @@ public class Application  implements java.io.Serializable {
     public void setAppnotice(String appnotice) {
         this.appnotice = appnotice;
     }
-   
-
-
-
-
-
-
-
-
 }

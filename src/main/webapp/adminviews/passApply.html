@@ -1,4 +1,4 @@
-<div ng-controller="findApplyCtrl" class="welcome2">
+<div ng-controller="findpassApplyCtrl" class="welcome2">
     <table class="table table-bordered table-hover">
         <tr>
             <th>用户名</th>
@@ -7,7 +7,6 @@
             <th>人数</th>
             <th>退订原因</th>
             <th>退订日期</th>
-            <th>操作</th>
         </tr>
         <tr ng-repeat="item in application">
             <td>{{item.username}}</td>
@@ -16,10 +15,6 @@
             <td>{{item.gonumber}}</td>
             <td>{{item.appnotice}}</td>
             <td>{{item.appdate}}</td>
-            <td>
-                <button class="btn btn-primary btn-small" ng-click="pass(item.appid)">通过</button>
-                <button class="btn btn-primary btn-small" ng-click="reject(item.appid)">拒绝</button>
-            </td>
         </tr>
     </table>
 </div>

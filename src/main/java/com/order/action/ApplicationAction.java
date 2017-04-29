@@ -72,4 +72,124 @@ public class ApplicationAction extends ActionSupport implements ModelDriven<Appl
 		response.getWriter().print(json.toString());
 		return NONE;
 	}
+	/**
+	 * 管理员查看所有的用户正在申请
+	 */
+	public String adminGetApp() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Application> list=applicationService.findAll();
+		List<ApplicationDate> list2=new ArrayList();
+		for(Application app:list){
+			if(app.getAppstate().equals("0")){
+				ApplicationDate a=new ApplicationDate();
+				a.setUsername(app.getOrder().getUser().getUsername());
+				a.setProductname(app.getOrder().getProduct().getProductname());
+				a.setPrice(app.getOrder().getPrice());
+				a.setGonumber(app.getOrder().getGonumber());
+				a.setApptype("退订");
+				a.setAppstate("申请中");
+				a.setAppdate(app.getAppdate().toString());
+				a.setAppnotice(app.getAppnotice());
+				a.setAppid(app.getAppid());
+				a.setApproderid(app.getOrder().getOrderid());
+				list2.add(a);
+			}
+		}
+		json.accumulate("code", 200);
+ 		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 管理员查看通过申请订单
+	 */
+	public String adminGetPassapp() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Application> list=applicationService.findAll();
+		List<ApplicationDate> list2=new ArrayList();
+		for(Application app:list){
+			if(app.getAppstate().equals("1"));{
+				ApplicationDate a=new ApplicationDate();
+				a.setUsername(app.getOrder().getUser().getUsername());
+				a.setProductname(app.getOrder().getProduct().getProductname());
+				a.setPrice(app.getOrder().getPrice());
+				a.setGonumber(app.getOrder().getGonumber());
+				a.setApptype("退订");
+				a.setAppstate("通过申请");
+				a.setAppdate(app.getAppdate().toString());
+				a.setAppnotice(app.getAppnotice());
+				a.setAppid(app.getAppid());
+				a.setApproderid(app.getOrder().getOrderid());
+				list2.add(a);
+			}
+		}
+		json.accumulate("code", 200);
+ 		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	
+	
+	/**
+	 * 管理员查看未通过的申请订单
+	 */
+	public String adminGetNopassapp() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Application> list=applicationService.findAll();
+		List<ApplicationDate> list2=new ArrayList();
+		for(Application app:list){
+			if(app.getAppstate().equals("2"));{
+				ApplicationDate a=new ApplicationDate();
+				a.setUsername(app.getOrder().getUser().getUsername());
+				a.setProductname(app.getOrder().getProduct().getProductname());
+				a.setPrice(app.getOrder().getPrice());
+				a.setGonumber(app.getOrder().getGonumber());
+				a.setApptype("退订");
+				a.setAppstate("未通过");
+				a.setAppdate(app.getAppdate().toString());
+				a.setAppnotice(app.getAppnotice());
+				a.setAppid(app.getAppid());
+				a.setApproderid(app.getOrder().getOrderid());
+				list2.add(a);
+			}
+		}
+		json.accumulate("code", 200);
+ 		json.accumulate("data", list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 同意用户申请
+	 */
+	public String passApp() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		Application app=applicationService.findByAppid(Integer.parseInt(request.getParameter("appid")));
+		applicationService.passApp(app);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 拒绝用户申请
+	 */
+	public String rejectApp() throws IOException{
+		HttpServletResponse response = ServletActionContext.getResponse();
+		HttpServletRequest request=ServletActionContext.getRequest();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		Application app=applicationService.findByAppid(Integer.parseInt(request.getParameter("appid")));
+		applicationService.rejectApp(app);
+		json.accumulate("code", 200);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
 }

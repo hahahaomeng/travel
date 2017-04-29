@@ -97,5 +97,11 @@ app.run(function($rootScope, $state, $stateParams) {
         }).state("adminSuccess.findApply", {
             url: '/adminSuccess/findApply',
             templateUrl: 'adminviews/findApply.html'
+        }).state("adminSuccess.nopassApply", {
+            url: '/adminSuccess/nopassApply',
+            templateUrl: 'adminviews/nopassApply.html'
+        }).state("adminSuccess.passApply", {
+            url: '/adminSuccess/passApply',
+            templateUrl: 'adminviews/passApply.html'
         })
     });
