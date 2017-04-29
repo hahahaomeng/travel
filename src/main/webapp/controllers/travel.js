@@ -528,7 +528,7 @@ myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpPar
             }
         }).then(function (data) {
             if(data.data.code==200) {
-                $state.go('homeSuccess');
+                $state.go('homeSuccess.product');
             }else{
                 console.log("error");
             }
@@ -814,5 +814,23 @@ myContrl.controller("fixprodetailCtrl",function ($scope,$state,$stateParams,$htt
             $scope.product=null;
         }
     })
+    $scope.cancefix=function () {
+        $state.go("adminSuccess.fixproduct");
+    }
+    $scope.fixpro=function () {
+        $http({
+            url: "product_modProduct.json",
+            method: "post",
+            data: $httpParamSerializer({productid:$scope.product.productid,prodescribe:$scope.product.prodescribe,price:$scope.product.price,productname:$scope.product.productname,proplace:$scope.product.proplace,goplace:$scope.product.goplace,prodetail:$scope.product.prodetail,hoteldetail:$scope.product.hoteldetail}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if(data.data.code==200) {
+                $state.go("adminSuccess.fixproduct");
+            }else{
 
+            }
+        })
+    }
 })

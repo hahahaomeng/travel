@@ -97,11 +97,6 @@ app.run(function($rootScope, $state, $stateParams) {
        }).state("adminSuccess.fixprodetail", {
             url: '/adminSuccess/fixprodetail?productid',
             templateUrl: 'adminviews/fixprodetail.html'
-
-
-
-
-
        }).state("adminSuccess.findApply", {
             url: '/adminSuccess/findApply',
             templateUrl: 'adminviews/findApply.html'

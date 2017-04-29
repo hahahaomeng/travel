@@ -79,7 +79,7 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		JSONObject json = new JSONObject();
 		Product product2 = productService.findProductById(Integer
 				.parseInt(request.getParameter("productid")));
-		product2.setDiscount(Double.parseDouble(request.getParameter("discount")));
+		//product2.setDiscount(Double.parseDouble(request.getParameter("discount")));
 		product2.setGoplace(request.getParameter("goplace"));
 		product2.setHoteldetail(request.getParameter("hoteldetail"));
 		product2.setPrice(Double.parseDouble(request.getParameter("price")));

@@ -1,4 +1,76 @@
-<div ng-controller="fixprodetailCtrl">
-    修改产品页面
-    {{productid}}
+<div ng-controller="fixprodetailCtrl" class="welcome2">
+    <form class="form-horizontal" role="form" name="myForm" novalidate>
+        <div class="form-group">
+            <br>
+            <label class="col-sm-3 control-label">景点名称</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <input type="text" class="form-control"
+                           name="productname" ng-model="product.productname"
+                           placeholder="请输入景点名称">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点描述</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="3" ng-model="product.prodescribe" placeholder="请输入景点描述"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点价格</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <input type="number" class="form-control"
+                           ng-model="product.price"
+                           placeholder="请输入景点价格">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点地址</label>
+            <div class="col-sm-7">
+                <div class="col-md-7">
+                    <input type="text" class="form-control"
+                           ng-model="product.proplace"
+                           placeholder="请输入景点地址">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">出发地址</label>
+            <div class="col-sm-7">
+                <div class="col-md-7">
+                    <input type="text" class="form-control"
+                           ng-model="product.goplace"
+                           placeholder="请输入景点出发地址">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">景点详情</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="4" ng-model="product.prodetail" placeholder="请输入景点详情"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">酒店详情</label>
+            <div class="col-sm-9">
+                <div class="col-md-11">
+                    <textarea class="form-control" rows="2" ng-model="product.hoteldetail" placeholder="请输入酒店详情"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-8" style="text-align: center">
+                <button type="button" class="btn btn-primary" ng-click="cancefix()">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="fixpro()">修改</button>
+            </div>
+        </div>
+    </form>
 </div>
