@@ -13,7 +13,9 @@
             <td>{{item.commentdate}}</td>
             <td><img class="img-responsive" src={{item.commenturl}} width="60px" height="33px"></td>
             <td>{{item.content}}</td>
-            <td>{{item.commentstate}}</td>
+            <td>
+                <span uib-rating style="font-size: 20px;color:#ED5565;" ng-model="item.commentstate" max="5" read-only="true" aria-labelledby="default-rating"></span>
+            </td>
         </tr>
     </table>
 </div>

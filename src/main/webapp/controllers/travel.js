@@ -214,7 +214,7 @@ myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
     $scope.currIndex = 0;
 })
 //产品详情页面控制器
-myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$window) {
+myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$window,$timeout) {
     $scope.productid=$stateParams.productid;
     $scope.username=$stateParams.username;
     $scope.applyorder=function () {
@@ -234,7 +234,7 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
             }).then(function (data) {
                 if (data.data.code == 200) {
                     $scope.order = data.data.data;
-                    $state.go('homeSuccess.payorder', {orderid: $scope.order.orderid});
+                    // $state.go('homeSuccess.payorder', {orderid: $scope.order.orderid});
                 } else {
                     $scope.order = null;
                 }
@@ -273,6 +273,30 @@ myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpPa
                 $scope.comment=null;
             }
         })
+    }
+    $scope.payMoney=function (orderid) {
+        $('#yuding').modal('hide');
+        var yuding = $timeout(function () {
+            $http({
+                url: "order_payOrder.json",
+                method: "post",
+                data: $httpParamSerializer({orderid: orderid}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+                }
+            }).then(function (data) {
+                if (data.data.code == 200) {
+                    $state.go('homeSuccess.product');
+                } else {
+                    console.log("error");
+                }
+            })
+        }, 500)
+    }
+    $scope.cacelpay=function () {
+        var cacel = $timeout(function () {
+            $state.go('homeSuccess.product');
+        }, 500)
     }
 })
 //查询所有订单页面控制器
@@ -533,39 +557,39 @@ myContrl.controller("forgetpsdCtrl",function ($scope,$state,$stateParams,$httpPa
     }
 })
 //付款页面控制器
-myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
-    $scope.orderid = $stateParams.orderid;
-    $http({
-        url: "order_findOrderById.json",
-        method: "post",
-        data: $httpParamSerializer({orderid: $scope.orderid}),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        }
-    }).then(function (data) {
-        if (data.data.code == 200) {
-            $scope.order = data.data.data;
-        } else {
-            $scope.order = null;
-        }
-    })
-    $scope.payMoney=function (orderid) {
-        $http({
-            url: "order_payOrder.json",
-            method: "post",
-            data: $httpParamSerializer({orderid:orderid}),
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-            }
-        }).then(function (data) {
-            if(data.data.code==200) {
-                $state.go('homeSuccess.product');
-            }else{
-                console.log("error");
-            }
-        })
-    }
-})
+// myContrl.controller("payorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+//     $scope.orderid = $stateParams.orderid;
+//     $http({
+//         url: "order_findOrderById.json",
+//         method: "post",
+//         data: $httpParamSerializer({orderid: $scope.orderid}),
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+//         }
+//     }).then(function (data) {
+//         if (data.data.code == 200) {
+//             $scope.order = data.data.data;
+//         } else {
+//             $scope.order = null;
+//         }
+//     })
+//     $scope.payMoney=function (orderid) {
+//         $http({
+//             url: "order_payOrder.json",
+//             method: "post",
+//             data: $httpParamSerializer({orderid:orderid}),
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+//             }
+//         }).then(function (data) {
+//             if(data.data.code==200) {
+//                 $state.go('homeSuccess.product');
+//             }else{
+//                 console.log("error");
+//             }
+//         })
+//     }
+// })
 //申请页面控制器
 myContrl.controller("apprebackCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
     $http({

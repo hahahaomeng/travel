@@ -15,14 +15,78 @@
                         出发日期
                         <input type="date" value="2015-09-24" ng-model="godate" class="form-control date"/>
                     </div>
-                    <button class="btn btn-primary" style="margin-top:20px;" ng-click="applyorder()">立即预定</button>
+                    <button class="btn btn-primary" style="margin-top:20px;" ng-click="applyorder()" data-toggle="modal" data-target="#yuding">立即预定</button>
                 </div>
             </div>
+
+
+
+            <div class="modal fade"  ng-if="username" id="yuding" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>预定信息</h3>
+                        </div>
+                        <div class="modal-body">
+                            <h4>你已经预定成功</h4>
+                        </div>
+                        <div>
+                            <button type="button" class="tuiding-btn btn btn-success" data-dismiss="modal" ng-click="cacelpay()">取消付款</button>
+                            <button type="button" class="tuiding-btn btn btn-primary" data-dismiss="modal" ng-click="payMoney(order.orderid)">立即付款</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
             <hr>
             <div>
                 <uib-tabset active="activeJustified">
                     <uib-tab index="0" heading="景点详情"><div class="panel panel-warning" style="font-size: 15px;font-family: Consolas;margin-top: 20px;">{{product.prodetail}}</div></uib-tab>
-                    <uib-tab index="1" heading="用户须知">Short Labeled Justified content</uib-tab>
+                    <uib-tab index="1" heading="用户须知">
+                        <dl  style="border-bottom:0;margin-bottom:0;padding-bottom:0">
+                            <dt>费用包含</dt>
+                            <dd> <ul class="num_list">
+                                <li>往返经济舱机票、燃油附加费（以实际收费标准为准）、机票税</li>
+                                <li>行程所列酒店住宿费用</li>
+                                <li>酒店标准2人间</li>
+                                <li>行程内所列餐食（行程中注明的自理餐除外，飞机餐是否收费请参照航空公司规定）。</li>
+                                <li>领队和当地中文导游服务。</li>
+                                <li>安排当地专属用车(除部分特殊路段因当地规定及安全考量，则依规定派遣小型车)。</li>
+                                <li>行程中所列景点首道大门票，详见行程。</li>
+                                <li>新加坡团签、旅游签证费用。</li>
+                                <li>如有新加坡个签签证，请仔细查看签证有效期是否在回程日期内，请提前告知客服，出发时随身携带，避免重复做新加坡团签被拒签的风险。</li>
+                                <li>此产品已包含保险名称保险，一人一份。</li>
+                                <li>儿童价特殊说明：2-11周岁不含早，不占床，其余服务同成人。
+                                    <br>12周岁以上必须占床，需额外+700元/人</li>
+                            </ul>
+                            </dd>
+                            <dt>自理费用</dt> <dd>
+                            <ul>
+                            <li>您所支付的费用中不包含330人民币/人的签证价格。请在出入境时自备有效签证，如需代办，请在预订时选择相应附加费用选项。</li>
+                            <li>外宾（包括港澳台地区）需要支付900人民币/人的差价，请在后续附加产品页面中选择外宾附加费选项。</li>
+                            <li>1、您所支付的费用中不包含马来西亚个人旅游签证330元/人，如需代办，请选择附加服务可选项。
+                                <br>2、2017年云顶的新缆车开始运营,规定客人只能携带手提小行李或登机箱尺寸不超过7公斤重量乘坐缆车,我社建议大件行李寄存在云顶缆车处,寄存费用为每晚每件5马币，请客人当场现付。<br>
+                            </li>
+                            <li>出入境个人物品海关征税，超重行李的托运费、保管费。</li>
+                            <li>因交通延阻、罢工、天气、飞机、机器故障、航班取消或更改时间等不可抗力原因所导致的额外费用。</li>
+                            <li>酒店内洗衣、理发、电话、传真、收费电视、饮品、烟酒等个人消费。</li>
+                            <li>“费用包含”中不包含的其它项目。</li>
+                            <li>单房差</li>
+                        </ul>
+                        </dd>
+                        </dl>
+
+
+                        <div id="js_order_needknow"style="">
+                            <h3 class="resource_title">预订须知<i class="icon_b icon_b_06"></i></h3>
+                            <p class="group_book_notice">(本产品由上海携程国际旅行社有限公司代理招徕，委托社为上海中青旅行社有限公司，具体的旅游服务和操作由委托社提供。
+                                <!--<a title="网上预订须知" rel="nofollow" href="/bookingnext/Knowledge?Type=NeedKnow&amp;SalesCity=2&amp;PKG=13992249" target="_blank">网上预订须知</a>)</p>-->
+                            <dl class="detail_date"> <dt>预订限制</dt> <dd> <ul class="num_list">  <li>本产品不接受79岁以上(含)客人预订，敬请原谅。</li>  <li>18岁以下未成年人需要至少一名家长或成年旅客全程陪同。</li>  <li>12周岁以下儿童不占床，如需占床按成人提交订单。</li>  <li>70周岁（含）以上老年人预订出行需确保身体健康适宜旅游，并有18周岁以上家属或朋友（因服务能力所限无法接待及限制接待的人除外）全程陪同出行。</li>  <li>本产品不接受70周岁以上(含)的客人单独报名出游，敬请谅解！</li>  <li>本产品不接受儿童按成人提交订单，敬请谅解。</li>  <li>报价是按照2人入住1间房计算的价格，如您的订单产生单房，携程将安排您与其他客人拼房入住。如您要求享受单房，请在后续附加产品页面中选择单人房差选项。</li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt>预订说明</dt> <dd> <ul class="num_list">  <li>请您在预订时务必提供准确、完整的信息（姓名、性别、证件号码、国籍、联系方式、是否成人或儿童等），以免产生预订错误，影响出行。如因客人提供错误个人信息而造成损失，我社不承担任何责任。</li>  <li>由于目的地酒店较小，暂不提供3人间，敬请见谅。房型以到酒店登记时确认为准，不可提前指定房型。</li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt>产品说明</dt> <dd> <ul class="num_list">  <li>最少成团人数10人，出发前30天如您未收到成团通知，携程会短信询问您是否愿意等待。如已成团，最晚于出发前1-2天直接发送出团通知给您。如您预订时距出发日期已不足30天，携程不保证一定成团，下单后请您耐心等待是否成团的通知，您也可以选择已成团的班期或产品预订，以确保行程。</li>  <li>如因意外事件及不可抗力，包括但不限于，航空公司运力调配、航权审核、机场临时关闭、天气原因、航空管制等，导致航班取消或延期的，旅行社将尽最大努力协助您办理变更事宜，如产生差价，多退少补。</li>  <li>具体航班号及航班时刻，请以最终所出机票信息为准。</li>  <li>本行程在实际游览过程中可能会有不同的车辆和导游为您服务，如给您带来不便，敬请谅解！</li>  <li>本产品行程实际出行中，在不减少景点且征得客人同意的前提下，导游、司机可能会根据天气、交通等情况，对您的行程进行适当调整（如调整景点游览顺序等），以确保行程顺利进行。如因不可抗力等因素确实无法执行原行程计划，对于因此而造成的费用变更，我社实行多退少补，敬请配合。</li>  <li>由于设备故障、天气原因等其他不可抗力造成您未能参加行程内费用包含的景点，请将门票退还给当地导游并留取凭证，相关费用将在您回国后退还。</li>  <li>出游过程中，如遇不可抗力因素造成景点未能正常游玩，导游经与客人协商后可根据实际情况取消或更换该景点，或由导游在现场按旅游产品中的门票价退还费用，退费不以景区挂牌价为准，敬请谅解。</li>  <li>行程中的赠送项目，如因交通、天气等不可抗因素导致不能赠送的、或因您个人原因不能参观的，费用不退，敬请谅解。</li>  <li>团队行程中，非自由活动期间，不允许提前离团或中途脱团，如有不便敬请谅解。</li>  <li>所有确认入住的酒店以我公司的“出团说明书”为准。</li>  <li>因当地经济条件有限，交通、酒店服务及设施、餐饮等方面与发达城市相比会有一定的差距，敬请谅解。</li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt>违约条款</dt> <dd> <ul class="num_list">  <li>旅行社违约：<br>行程前30日至15日，退还全额旅游费用，支付旅游费用总额2％的违约金。<br>行程前14日至7日，退还全额旅游费用，支付旅游费用总额5％的违约金。<br>行程前6日至1日，退还全额旅游费用，支付旅游费用总额70％的违约金。<br>行程开始当日，退还全额旅游费用，支付旅游费用总额70％的违约金。<br></li>  <li>旅游者违约：<br>在行程前解除合同的，必要的费用扣除标准为：<br>行程前30日至15日，收取旅游费用总额32％的违约金。<br>行程前14日至7日，收取旅游费用总额35％的违约金。<br>行程前6日至1日，收取旅游费用总额100％的违约金。<br>行程开始当日，收取旅游费用总额100％的违约金。<br></li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt>出行须知</dt> <dd> <ul class="num_list">  <li>我司将最晚在出行前1天向您发送《出团通知书》或导游的确认电话，如未收到请及时联系携程工作人员。</li>  <li>请在导游约定的时间到达上车地点集合，切勿迟到，以免耽误其他游客行程。若因迟到导致无法随车游览，责任自负，敬请谅解。</li>  <li>旅游团队用餐，旅行社按承诺标准确保餐饮卫生及餐食数量，但不同地区餐食口味有差异，不一定满足游客口味需求，敬请见谅。</li>  <li>购物说明：<br>（1）全程不强制购物；<br>（2）游客在指定购物店中为自愿购物，所购商品非质量问题一律不予退还；<br>（3）行程规定的景点、餐厅，长途中途休息站等这类购物店不属于旅游定点商店，若商品出现质量问题，旅行社不承担任何责任；<br>（4）游客自行前往的购物店所购商品出现质量问题，旅行社不承担任何责任。</li>  <li>行程中涉及的购物点购物自愿，购物时请您务必谨慎，请在付款前仔细查验，确保商品完好无损、配件齐全并具备相应的鉴定证书，明确了解商品售后服务流程。购买后请妥善保管相关票据。</li>  <li>为了不耽误您的行程，请您在国际航班起飞前150分钟到达机场办理登机＆出入境相关手续。</li>  <li>如果您乘坐的是春秋、亚洲航空等廉价航班，我们提醒您：（1）请注意旅客的免费行李额（包括托运行李、自理行李及随身携带物品）为15公斤（婴儿无免费行李额）。超重部分需支付逾重行李费。（2）每位旅客带入客舱的行李物品（包括自理行李及随身携带物品）仅限一件，体积不超过20厘米×30厘米×40厘米，重量一般不超过5公斤（各航司规定略有差异）。托运行李体积不超过40厘米×60厘米×100厘米。另外需要提醒您注意的是，托运行李、自理行李及随身携带物品的重量合并计入免费行李额中，行李逾重收费标准请遵照各航司的逾重行李收费规定。详情参考：<a href="http://flights.ch.com/baggage-rule" target="_blank">【春秋航空】</a>  <a href="http://www.airasia.com/cn/zh/baggage-info/cabin-baggage.page" target="_blank">【亚洲航空】</a>。</li>  <li>目的地可能有部分私人经营的娱乐、消费场所，此类组织多数无合法经营资质，存在各种隐患。为了您的安全和健康考虑，携程提醒您，谨慎消费。</li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt>出行指南及法规</dt> <dd> <ul class="num_list">  <li><a href="https://m.ctrip.com/webapp/vacation-crm/Strategy/Index/12" target="_blank"> 新加坡出行指南</a></li>  <li>禁忌提示：请尊重当地的饮食习惯、习俗禁忌、宗教礼仪等，入乡随俗，融入当地的民风民情。</li>  <li>为了您人身、财产的安全，请您避免在公开场合暴露贵重物品及大量现金。上街时需时刻看管好首饰、相机等随身物品。</li>  <li>游泳、漂流、潜水、滑雪、溜冰、戏雪等活动项目，均存在危险。参与前请根据自身条件，并充分参考当地相关部门及其它专业机构的相关公告和建议后量力而行。</li>  <li>携程从出行常识、旅游活动（风险性项目）和特殊人群三方面为您提供旅游安全指南，请您仔细阅读,<a href="http://vacations.ctrip.com/notes/4939.html" target="_blank"> 安全指南及警示</a>。</li>  <li>为普及旅游安全知识及旅游文明公约，使您的旅程顺利圆满完成，特制定<a href="http://pages.ctrip.com/tour/pdf3/20130930.pdf" target="_blank"> 《携程旅游告游客注意事项》</a>，请您认真阅读并切实遵守。</li>  <li>请务必仔细阅读关于<a href="http://vacations.ctrip.com/notes/670.html" target="_blank"> 《国际航班手提行李规定》</a>。</li>  <li>重要提示：自2017年4月6日零时起，北京首都机场已全面实施中国民用航空76号令，在北京首都机场中转的所有旅客，无论是转机国内航班还是国际航班，购买的即使是有发票、未拆封免税标识的液态物品，若物品容器容积超过100ml，均需托运，不得随身携带或作为手提行李过安检。</li>  <li>为确保锂电池的安全运输，避免发生不安全事件，我们友情提醒您，民航局将对旅客携带锂电池乘机进行严格检查。详情请参考<a href="http://vacations.ctrip.com/notes/4926.html" target="_blank"> 民航局关于旅客行李中携带“锂电池、充电宝”乘机规定的公告</a>。</li>  <li>根据中国海关总署颁布的2010年第54号、2016年第19号、2016年第25号令，进境公民旅客携带在境外获取5000元以内（含5000元）个人自用进境物品的基础上，允许其在口岸进境免税店增加一定数量的免税购物额，连同境外免税购物额总计不超过8000元人民币的，海关予以免税放行，但烟草制品、酒精制品等国家规定应当征税的商品不在免税范围内，敬请知晓。详情请<a href="http://vacations.ctrip.com/notes/4941.html" target="_blank"> 点击</a>。</li>  <li><a href="http://pages.ctrip.com/tour/pdf/111122.pdf" target="_blank"> 新加坡旅游游客退税指南</a></li>  <li>根据发布的《中华人民共和国禁止携带、邮寄进境的动植物及其产品和其他检疫物名录》，将燕窝、新鲜水果、蔬菜、动物源性中药材、转基因生物材料等列入严禁携带或邮寄进境项目，敬请知晓。更多信息，<a href="http://dzwjyjgs.aqsiq.gov.cn/rdgz/201202/t20120223_209369.htm" target="_blank"> 请点击</a>。</li>  <li>请您严格遵守境外旅游目的地有关国家法律法规，切勿从事象牙等濒危野生动植物及其制品交易或携带相关物品，避免因触犯法律损害自身利益。</li>  </ul> </dd> </dl>    <dl class="detail_date"> <dt> 支付信息  <span data-role="jmp" class="payment_infor" data-params="{options:{type:'jmp_title',classNames:{boxType:'jmp_title'},template:'#jmp_pkg_title', content:{txt0:'<strong>付款时间</strong> <br/>',txt1:'为确保您的订单资源，请在提交订单时立即付款。<br/><br/><strong>常见支付方式说明</strong><br/>1、现金支付：上门收款（支持现金、pos机）。<br/> 2、信用卡：无需开通网上银行，支持大额支付。客户自行在网上操作或电话下单时根据语音提示操作。<br/>3、网上银行：支持开通网上银行的储蓄卡及信用卡。客户自行在网上操作。<br/>4、第三方：支付宝，银联在线，财付通，微信支付。<br/>5、礼品卡支付'},css:{maxWidth:'580',minWidth:'240'},alignTo:'cursor',showArrow:false}}"> <i class="icon_help"></i> <em>常见支付问题</em> </span>  </dt> <dd> <ul class="num_list">  <li>本产品支持现金、信用卡、网银/第三方、礼品卡、储蓄卡、现金余额、拿去花支付，具体以支付页为准。</li>  </ul> </dd> </dl>  </div>
+                    </uib-tab>
                     <uib-tab index="2" heading="驴友点评" select="getComment()">
                         <div class="comment-container well" ng-repeat="item in comment">
                             <div class="comment-left">
