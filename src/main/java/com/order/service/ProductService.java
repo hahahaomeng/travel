@@ -40,4 +40,9 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		productDAO.attachDirty(product);
 	}
+
+	public List<Product> findProByPlace(String proplace) {
+		// TODO Auto-generated method stub
+		return productDAO.findByProplace(proplace);
+	}
 }

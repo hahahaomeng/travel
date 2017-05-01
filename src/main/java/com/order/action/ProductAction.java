@@ -121,4 +121,19 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		response.getWriter().println(json.toString());
 		return NONE;
 	}
+	/**
+	 * 根据地名获取景点
+	 */
+	public String findSomePro() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		String proplace=request.getParameter("proplace");	
+		List<Product> list=productService.findProByPlace(proplace);
+		json.accumulate("code", 200);
+		json.accumulate("data", list);
+		response.getWriter().println(json.toString());
+		return NONE;
+	}
 }

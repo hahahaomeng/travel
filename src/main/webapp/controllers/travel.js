@@ -190,7 +190,7 @@ myContrl.controller("logSucCtrl",function ($scope,$httpParamSerializer,$http,$st
 
 })
 //获取产品列表控制器
-myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
+myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams,$httpParamSerializer) {
     $scope.productdetail = function (productid) {
         $state.go('homeSuccess.productdetail', {productid: productid});
     }
@@ -212,6 +212,22 @@ myContrl.controller("getProCtrl",function ($scope,$http,$state,$stateParams) {
     $scope.noWrapSlides = false;
     $scope.active = 0;
     $scope.currIndex = 0;
+    $scope.getsomeproduct=function (place) {
+        $http({
+            url: "product_findSomePro.json",
+            method: "post",
+            data: $httpParamSerializer({proplace:place}),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if (data.data.code == 200) {
+                $scope.product = data.data.data;
+            } else {
+                $scope.product = null;
+            }
+        })
+    }
 })
 //产品详情页面控制器
 myContrl.controller("prodetailCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http,$window,$timeout) {
