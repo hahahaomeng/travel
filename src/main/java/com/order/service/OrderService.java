@@ -38,6 +38,7 @@ public class OrderService {
 	 */
 	public List<OrderDate> findOrdByUser(User user){
 		List<Order> list= orderDAO.findByProperty("user", user);
+		//list.subList(0+8*(x-1), 8+8*(x-1));
 		List<OrderDate> list2=new ArrayList<OrderDate>();
 		for(Order order:list){
 			OrderDate orderDate=new OrderDate();
