@@ -19,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.order.bean.AdminOrderDate;
 import com.order.bean.OrderDate;
+import com.order.bean.OrderPicture;
 import com.order.entity.Application;
 import com.order.entity.Order;
 import com.order.entity.Product;
@@ -292,6 +293,45 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 			list2.add(a);
 		}
 		
+		json.accumulate("code", 200);
+		json.accumulate("data",list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	//查看每个产品的预定个数
+	public String findSumByPro() throws IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Order> list=orderService.findAllOrder();
+		//List<OrderPicture> list2=new ArrayList(); 
+//		OrderPicture a=new OrderPicture();
+//		a.setName(list.get(0).getProduct().getProductname());
+//		list2.add(a);
+		//System.out.println(list.size());
+		List<String> list3=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			list3.add(list.get(i).getProduct().getProductname());
+		}
+		for(int i=0;i<list3.size()-1;i++){
+			for(int j=list3.size()-1;j>i;j--){
+				if(list3.get(j).equals(list3.get(i))){
+					list3.remove(j);
+				}
+			}
+		}
+		List<OrderPicture> list2=new ArrayList();
+		for(int i=0;i<list3.size();i++){
+			int sum=0;
+			for(Order order:list){
+				if(order.getProduct().getProductname().equals(list3.get(i))){
+					sum++;
+				}
+			}
+			OrderPicture b=new OrderPicture(list3.get(i),sum);
+			list2.add(b);
+		}
 		json.accumulate("code", 200);
 		json.accumulate("data",list2);
 		response.getWriter().print(json.toString());

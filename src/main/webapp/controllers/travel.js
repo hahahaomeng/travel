@@ -42,7 +42,10 @@ myContrl.controller("registerCtrl",function ($scope,$httpParamSerializer,$http,$
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
             }
 		}).then(function (data) {
-			console.log(data);
+		    if(data.data.code==200) {
+		        console.log(data.data.code);
+                $state.go('index');
+            }
         })
     }
     $scope.checkUserName=function () {
@@ -904,4 +907,39 @@ myContrl.controller("fixprodetailCtrl",function ($scope,$state,$stateParams,$htt
             }
         })
     }
+})
+//管理员首页控制器
+myContrl.controller("AdminCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http) {
+    $http({
+        url: "order_findSumByPro.json",
+        method: "post",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+    }).then(function (data) {
+        if(data.data.code==200) {
+            console.log(data.data.data);
+            // 基于准备好的dom，初始化echarts实例
+             var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: '55%',
+                        data:data.data.data
+                        // data: [
+                        //     {value: data.data.data[0].value, name: data.data.data[0].name},
+                        //     {value: data.data.data[1].value, name: data.data.data[1].name},
+                        //     {value: data.data.data[2].value, name: data.data.data[2].name},
+                        //     {value: data.data.data[3].value, name: data.data.data[3].name},
+                        // ]
+                    }
+                ]
+            };
+            myChart.setOption(option);
+        }
+    })
 })
