@@ -687,8 +687,9 @@ myContrl.controller("addproductCtrl",function ($scope,$state,$stateParams,$httpP
 })
 //管理员查看订单控制器
 myContrl.controller("findorderCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
+    var myChart = echarts.init(document.getElementById('chartorder'));
     $http({
-        url: "order_adminfindOrder.json",
+        url: "order_findOrderByTime.json",
         method: "post",
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -696,10 +697,63 @@ myContrl.controller("findorderCtrl",function ($scope,$state,$stateParams,$httpPa
     }).then(function (data) {
         if(data.data.code==200) {
             $scope.adminorder=data.data.data;
+            myChart.setOption({
+                title: {
+                    text: '该时段内的订单数柱状图'
+                },
+                tooltip: {},
+                legend: {
+                    data:['订单数']
+                },
+                xAxis: {
+                    data: data.data.name
+                },
+                yAxis: {},
+                series: [{
+                    name: '订单数',
+                    type: 'bar',
+                    data:data.data.value
+                }]
+            });
         }else{
             $scope.adminorder=null;
         }
     })
+    $scope.findorderbytime=function () {
+        $http({
+            url: "order_findOrderByTime.json",
+            method: "post",
+            data: $httpParamSerializer({kaishitime:$scope.begintime,jieshutime:$scope.endtime}),
+            headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        }).then(function (data) {
+            if (data.data.code == 200) {
+               $scope.adminorder=data.data.data;
+
+                myChart.setOption({
+                    title: {
+                        text: '该时段内的订单数柱状图'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['订单数']
+                    },
+                    xAxis: {
+                        data: data.data.name
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '订单数',
+                        type: 'bar',
+                        data:data.data.value
+                    }]
+                });
+            } else {
+                console.log("error");
+            }
+        })
+    }
 })
 //管理员修改景点控制器
 myContrl.controller("fixproductCtrl",function ($scope,$state,$stateParams,$httpParamSerializer,$http){
@@ -930,12 +984,6 @@ myContrl.controller("AdminCtrl",function ($scope,$state,$stateParams,$httpParamS
                         type: 'pie',
                         radius: '55%',
                         data:data.data.data
-                        // data: [
-                        //     {value: data.data.data[0].value, name: data.data.data[0].name},
-                        //     {value: data.data.data[1].value, name: data.data.data[1].name},
-                        //     {value: data.data.data[2].value, name: data.data.data[2].name},
-                        //     {value: data.data.data[3].value, name: data.data.data[3].name},
-                        // ]
                     }
                 ]
             };

@@ -305,11 +305,6 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		response.setContentType("text/html;charset=UTF-8");
 		JSONObject json = new JSONObject();
 		List<Order> list=orderService.findAllOrder();
-		//List<OrderPicture> list2=new ArrayList(); 
-//		OrderPicture a=new OrderPicture();
-//		a.setName(list.get(0).getProduct().getProductname());
-//		list2.add(a);
-		//System.out.println(list.size());
 		List<String> list3=new ArrayList();
 		for(int i=0;i<list.size();i++){
 			list3.add(list.get(i).getProduct().getProductname());
@@ -334,6 +329,93 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		}
 		json.accumulate("code", 200);
 		json.accumulate("data",list2);
+		response.getWriter().print(json.toString());
+		return NONE;
+	}
+	/**
+	 * 按照时间段来选择订单
+	 * @throws ParseException 
+	 * @throws IOException 
+	 */
+	public String findOrderByTime() throws ParseException, IOException{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject json = new JSONObject();
+		List<Order> list=orderService.findAllOrder();
+		List<AdminOrderDate> p=new ArrayList();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date;
+		if(request.getParameter("kaishitime")==null){
+			date=sdf.parse("2017-04-01");
+		}else{
+			date = sdf.parse(request.getParameter("kaishitime").substring(0, 10));
+		}
+		Date date2;
+		if(request.getParameter("jieshutime")==null){
+			date2 = new Date();
+		}else{
+			date2 = sdf.parse(request.getParameter("jieshutime").substring(0, 10));
+		}
+		//所有符合条件的Order
+		List<Order> chartOrder=new ArrayList();
+		for(Order order:list){
+			if(sdf.parse(order.getPaydate().toString()).getTime()>=date.getTime()&&order.getPaydate().getTime()<=date2.getTime()){
+				chartOrder.add(order);
+				AdminOrderDate a=new AdminOrderDate();
+				a.setUsername(order.getUser().getUsername());
+				a.setOrderid(order.getOrderid());
+				a.setProductname(order.getProduct().getProductname());
+				a.setProducturl(order.getProduct().getImageurl());
+				a.setGodata(order.getGodate().toString());
+				a.setGonumber(order.getGonumber());
+				a.setGoplace(order.getProduct().getGoplace());
+				a.setPrice(order.getPrice());
+				a.setProplace(order.getProduct().getProplace());
+				if(order.getState().equals("0")){
+					a.setState("未付款");
+				}else if(order.getState().equals("1")){
+					a.setState("已付款");
+				}else if(order.getState().equals("2")){
+					a.setState("已完成");
+				}else if(order.getState().equals("4")){
+					a.setState("已评论");
+				}else if(order.getState().equals("3")){
+					a.setState("退订中");
+				}
+				p.add(a);
+			}
+		}
+		
+		
+		List<String> list3=new ArrayList();
+		for(int i=0;i<chartOrder.size();i++){
+			list3.add(chartOrder.get(i).getProduct().getProductname());
+		}
+		for(int i=0;i<list3.size()-1;i++){
+			for(int j=list3.size()-1;j>i;j--){
+				if(list3.get(j).equals(list3.get(i))){
+					list3.remove(j);
+				}
+			}
+		}
+		List<Integer> list2=new ArrayList();
+		for(int i=0;i<list3.size();i++){
+			int sum=0;
+			for(Order order:chartOrder){
+				if(order.getProduct().getProductname().equals(list3.get(i))){
+					sum++;
+				}
+			}
+			list2.add(sum);
+		}
+		
+		
+		
+		json.accumulate("code", 200);
+		json.accumulate("data",p);
+		json.accumulate("name",list3);
+		json.accumulate("value",list2);
 		response.getWriter().print(json.toString());
 		return NONE;
 	}

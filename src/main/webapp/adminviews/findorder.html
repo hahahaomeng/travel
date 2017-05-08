@@ -1,4 +1,11 @@
 <div ng-controller="findorderCtrl" class="welcome2 panel panel-warning">
+    <div style="margin: 10px 0px 10px 5px;">
+        <!--<input type="date" value="2015-09-24" ng-model="godate" class="form-control date"/>-->
+        <span class="h4">开始时间:</span><input type="date" value="2017-04-01" ng-model="begintime"/>
+        <span class="h4">结束时间:</span><input type="date" ng-model="endtime"/>
+        <button class="btn btn-primary" ng-click="findorderbytime()">查询</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#chart">查看图表</button>
+    </div>
     <table class="table table-bordered table-hover">
         <tr>
             <th>用户名</th>
@@ -21,4 +28,21 @@
             <td>{{item.state}}</td>
         </tr>
     </table>
+    <div class="modal fade" id="chart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                </div>
+                <div class="modal-body">
+                    <div id="chartorder" style="width: 700px;height:400px;margin-left: 100px;">
+
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="tuiding-btn btn btn-success" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
