@@ -11,6 +11,14 @@ public class AdminOrderDate {
 	int gonumber;
 	String goplace;
 	String proplace;
+	String paydata;
+	
+	public String getPaydata() {
+		return paydata;
+	}
+	public void setPaydata(String paydata) {
+		this.paydata = paydata;
+	}
 	public String getUsername() {
 		return username;
 	}

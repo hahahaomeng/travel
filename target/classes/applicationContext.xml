@@ -134,6 +134,7 @@
 		<property name="orderService" ref="orderService"/>
 		<property name="productService" ref="productService"/>
 		<property name="applicationService" ref="applicationService"/>
+		<property name="userService" ref="userService"/>
 	</bean>
 	<bean id="commentAction" class="com.order.action.CommentAction" scope="prototype">
 		<property name="commentService" ref="commentService"/>

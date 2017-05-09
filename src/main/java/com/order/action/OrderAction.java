@@ -27,10 +27,12 @@ import com.order.entity.User;
 import com.order.service.ApplicationService;
 import com.order.service.OrderService;
 import com.order.service.ProductService;
+import com.order.service.UserService;
 
 public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	private Order order;
 	private ProductService productService;
+	private UserService userService;
 	private OrderService orderService;
 	private ApplicationService applicationService;
 	@Override
@@ -43,6 +45,9 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 	}
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
+	}
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 	public void setApplicationService(ApplicationService applicationService) {
 		this.applicationService = applicationService;
@@ -270,6 +275,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 		List<AdminOrderDate> list2=new ArrayList();
 		for(Order order:list){
 			AdminOrderDate a=new AdminOrderDate();
+			a.setPaydata(order.getPaydate().toString());
 			a.setUsername(order.getUser().getUsername());
 			a.setOrderid(order.getOrderid());
 			a.setProductname(order.getProduct().getProductname());
@@ -363,6 +369,7 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order> {
 			if(sdf.parse(order.getPaydate().toString()).getTime()>=date.getTime()&&order.getPaydate().getTime()<=date2.getTime()){
 				chartOrder.add(order);
 				AdminOrderDate a=new AdminOrderDate();
+				a.setPaydata(order.getPaydate().toString());
 				a.setUsername(order.getUser().getUsername());
 				a.setOrderid(order.getOrderid());
 				a.setProductname(order.getProduct().getProductname());
